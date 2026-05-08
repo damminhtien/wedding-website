@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const EVENT = Object.freeze({
   groom: "Đàm Minh Tiến",
-  bride: "Nguyễn Minh Thuỷ",
+  bride: "Nguyễn Minh Thuỳ",
   date: new Date("2026-05-11T11:00:00+07:00"),
   dateText: "11.05.2026",
   lunarDate: "25 tháng 03 năm Bính Ngọ",
@@ -13,7 +13,7 @@ const EVENT = Object.freeze({
   ceremonyTime: "10:30",
   partyTime: "11:00",
   groomFamily: ["Đàm Mạnh Tươi", "Phạm Thị Tấm"],
-  brideFamily: ["Nguyễn Văn Xuân", "Trần Thị Thanh Thảo"],
+  brideFamily: ["Nguyễn Văn Xuân", "Trần Thị Thanh Thao"],
 });
 
 const NAV_ITEMS = Object.freeze([
@@ -85,7 +85,7 @@ const GALLERY = Object.freeze([
   id: file,
   src: `/assets/images-optimized/thumbs/${file}.webp`,
   fullSrc: `/assets/images-optimized/large/${file}.webp`,
-  alt: `Ảnh cưới Tiến và Thuỷ ${index + 1}`,
+  alt: `Ảnh cưới Tiến và Thuỳ ${index + 1}`,
   orientation,
   span: orientation === "landscape" ? 34 : index % 5 === 0 ? 54 : index % 3 === 0 ? 48 : 44,
 })));
@@ -387,7 +387,7 @@ function RsvpModal({ open, onClose }) {
               <div className="relative py-10 text-center">
                 <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-[#42553d] text-white shadow-xl shadow-[#42553d]/20"><Icon name="heart" filled className="h-7 w-7" /></div>
                 <h2 className="font-serif text-3xl text-[#283b2c]">Đã ghi nhận lời chúc</h2>
-                <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[#5f684e]">Cảm ơn {form.name || "Quý khách"}. Hẹn gặp trong ngày vui của Tiến & Thuỷ.</p>
+                <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[#5f684e]">Cảm ơn {form.name || "Quý khách"}. Hẹn gặp trong ngày vui của Tiến & Thuỳ.</p>
                 <Button onClick={onClose} className="mt-7 px-8">Hoàn tất</Button>
               </div>
             )}
@@ -405,7 +405,7 @@ function Header({ onRsvp }) {
         <button type="button" onClick={() => smoothScroll("home")} className="group flex items-center gap-3">
           <div className="grid h-10 w-10 place-items-center rounded-full border border-[#d4be7b]/60 bg-white/75 font-serif text-base font-semibold text-[#b48b3a] shadow-sm">T&T</div>
           <div className="hidden text-left sm:block">
-            <div className="font-serif text-sm uppercase tracking-[0.2em] text-[#42553d]">Tiến & Thuỷ</div>
+            <div className="font-serif text-sm uppercase tracking-[0.2em] text-[#42553d]">Tiến & Thuỳ</div>
             <div className="text-[11px] text-[#8a7d5c]">Wedding invitation</div>
           </div>
         </button>
@@ -423,7 +423,7 @@ function Header({ onRsvp }) {
 function Hero({ onRsvp }) {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-[#f8f3e8] pt-20">
-      <img src={HERO_IMAGE} alt="Tiến và Thuỷ" className="absolute inset-0 h-full w-full object-cover" />
+      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#fffaf0]/95 via-[#fffaf0]/74 to-[#283b2c]/30" />
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#f8f3e8] to-transparent" />
       <FloralCorner className="absolute -left-24 top-16 h-80 w-80 rotate-180 text-[#71856b]" />
@@ -711,7 +711,7 @@ function Footer() {
       <FloralCorner className="absolute -bottom-16 left-8 h-72 w-72 rotate-45 text-white" />
       <FloralCorner className="absolute -right-12 -top-24 h-80 w-80 text-white" />
       <div className="relative mx-auto max-w-3xl">
-        <div className="font-serif text-5xl italic text-[#f4d78d]">Tiến & Thuỷ</div>
+        <div className="font-serif text-5xl italic text-[#f4d78d]">Tiến & Thuỳ</div>
         <p className="mt-4 text-sm leading-7 text-white/80">Cảm ơn Quý khách đã dành thời gian chung vui cùng gia đình.</p>
         <div className="mt-6 text-xs uppercase tracking-[0.24em] text-white/70">{EVENT.dateText} · {EVENT.venue}</div>
       </div>
