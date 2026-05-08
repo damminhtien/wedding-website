@@ -314,54 +314,53 @@ function CountdownCard() {
 }
 
 function MusicControl() {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
   const audioRef = useRef(null);
-  const oscillatorRef = useRef(null);
 
   useEffect(() => {
-    return () => {
+    const audio = audioRef.current;
+    if (!audio) return undefined;
+
+    const playAudio = async () => {
       try {
-        oscillatorRef.current?.stop();
-        audioRef.current?.close();
+        audio.volume = 0.55;
+        await audio.play();
+        setPlaying(true);
       } catch {
-        // AudioContext may already be closed.
+        setPlaying(false);
       }
     };
+
+    playAudio();
+    return () => audio.pause();
   }, []);
 
   const toggle = async () => {
-    if (playing) {
-      try {
-        oscillatorRef.current?.stop();
-        await audioRef.current?.close();
-      } finally {
-        oscillatorRef.current = null;
-        audioRef.current = null;
-        setPlaying(false);
-      }
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (!audio.paused) {
+      audio.pause();
+      setPlaying(false);
       return;
     }
 
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) return;
-    const ctx = new AudioContextClass();
-    const gain = ctx.createGain();
-    const oscillator = ctx.createOscillator();
-    oscillator.type = "sine";
-    oscillator.frequency.value = 392;
-    gain.gain.value = 0.025;
-    oscillator.connect(gain);
-    gain.connect(ctx.destination);
-    oscillator.start();
-    audioRef.current = ctx;
-    oscillatorRef.current = oscillator;
-    setPlaying(true);
+    try {
+      audio.volume = 0.55;
+      await audio.play();
+      setPlaying(true);
+    } catch {
+      setPlaying(false);
+    }
   };
 
   return (
-    <button type="button" onClick={toggle} className="group fixed bottom-24 left-5 z-40 grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-[#42553d]/90 text-white shadow-2xl backdrop-blur-xl transition hover:scale-105 md:bottom-5" aria-label={playing ? "Tắt nhạc" : "Bật nhạc"}>
-      <Icon name={playing ? "pause" : "play"} className="h-5 w-5" />
-    </button>
+    <>
+      <audio ref={audioRef} src="/assets/music.mp3" loop autoPlay preload="auto" playsInline />
+      <button type="button" onClick={toggle} className="group fixed bottom-24 left-5 z-40 grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-[#42553d]/90 text-white shadow-2xl backdrop-blur-xl transition hover:scale-105 md:bottom-5" aria-label={playing ? "Tắt nhạc" : "Bật nhạc"}>
+        <Icon name={playing ? "pause" : "play"} className="h-5 w-5" />
+      </button>
+    </>
   );
 }
 

@@ -39,6 +39,7 @@ npm run preview
 - `assets/images-optimized/thumbs`: ảnh WebP dùng cho gallery thumbnail.
 - `assets/images-optimized/large`: ảnh WebP lớn dùng cho hero và lightbox.
 - `assets/seo`: favicon, manifest và thumbnail chia sẻ mạng xã hội.
+- `assets/music.mp3`: nhạc nền phát trên website.
 
 ## Cập Nhật Nội Dung
 
