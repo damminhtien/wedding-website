@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build && mkdir -p dist/assets && cp -R assets/images-optimized dist/assets/",
+    "build": "vite build && mkdir -p dist/assets && cp -R assets/images-optimized assets/seo dist/assets/",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
