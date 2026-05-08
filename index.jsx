@@ -26,9 +26,9 @@ const NAV_ITEMS = Object.freeze([
 ]);
 
 const STORY = Object.freeze([
-  ["01.2020", "Lần đầu gặp gỡ", "Một cuộc gặp rất bình thường, mở đầu cho một hành trình rất đặc biệt."],
-  ["05.2021", "Chúng ta hẹn hò", "Những buổi hẹn giản dị, những câu chuyện dài và sự đồng hành mỗi ngày."],
-  ["12.2023", "Cầu hôn", "Một lời hứa nhẹ nhàng, đủ để hai người cùng bước sang chương mới."],
+  ["12.2021", "Lần đầu gặp gỡ", "Một cuộc gặp rất bình thường, mở đầu cho một hành trình rất đặc biệt."],
+  ["02.2022", "Lần đầu hẹn hò", "Những buổi hẹn giản dị, những câu chuyện dài và sự đồng hành mỗi ngày."],
+  ["Bí mật", "Cầu hôn", "Một lời hứa nhẹ nhàng, đủ để hai người cùng bước sang chương mới."],
   ["11.05.2026", "Về chung một nhà", "Ngày gia đình, bạn bè và những người thương cùng chứng kiến hạnh phúc."],
 ]);
 
