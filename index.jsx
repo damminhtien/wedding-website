@@ -578,7 +578,7 @@ function Hero({ onRsvp }) {
       <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.96fr_1.04fr]">
         <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/65 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8d6f31] backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.22em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
-          <h1 className="font-serif text-4xl font-semibold uppercase tracking-[0.08em] text-[#2f4232] sm:text-5xl md:text-7xl md:tracking-[0.12em]">Lễ Thành Hôn</h1>
+          <h1 className="font-serif text-4xl font-semibold uppercase tracking-[0.08em] text-[#1f3024] sm:text-5xl md:text-7xl md:tracking-[0.12em]" style={{ WebkitTextStroke: "0.7px rgba(255, 250, 240, 0.88)", textShadow: "0 2px 18px rgba(255, 250, 240, 0.94), 0 2px 4px rgba(40, 59, 44, 0.28)" }}>Lễ Thành Hôn</h1>
           <div className="mt-4 font-serif text-4xl italic leading-tight text-[#b48b3a] sm:mt-5 sm:text-5xl md:text-7xl">
             <div>{EVENT.groom}</div>
             <div className="text-3xl text-[#6b7758]">&</div>
