@@ -43,6 +43,7 @@ const NAV_ITEMS = Object.freeze([
   ["story", "Câu chuyện"],
   ["events", "Sự kiện"],
   ["location", "Địa điểm"],
+  ["gifts", "Mừng cưới"],
   ["gallery", "Album ảnh"],
   ["guestbook", "Lưu bút"],
 ]);
@@ -55,6 +56,11 @@ const STORY = Object.freeze([
 ]);
 
 const STORY_QUOTE = "At last, we have reached the fair harbor of lovers' love; now this love shall grow wider still, and make room for all the life before us.";
+
+const GIFT_ACCOUNTS = Object.freeze([
+  { name: "Đàm Minh Tiến", bank: "MB Bank", account: "8666180197" },
+  { name: "Nguyễn Minh Thuỳ", bank: "BIDV", account: "4550860245" },
+]);
 
 const SCHEDULE = Object.freeze([
   ["10:30", "Đón khách", "users"],
@@ -184,6 +190,23 @@ function openMap(event = WEDDING_EVENTS[1]) {
   window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, "_blank", "noopener,noreferrer");
 }
 
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const input = document.createElement("textarea");
+  input.value = text;
+  input.setAttribute("readonly", "");
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}
+
 function Icon({ name, className = "", filled = false }) {
   const common = {
     viewBox: "0 0 24 24",
@@ -209,6 +232,10 @@ function Icon({ name, className = "", filled = false }) {
       return <svg {...common}><path d="m15 18-6-6 6-6" /></svg>;
     case "chevron-right":
       return <svg {...common}><path d="m9 18 6-6-6-6" /></svg>;
+    case "check":
+      return <svg {...common}><path d="M20 6 9 17l-5-5" /></svg>;
+    case "copy":
+      return <svg {...common}><rect x="8" y="8" width="11" height="11" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" /></svg>;
     case "gift":
       return <svg {...common}><path d="M20 12v8H4v-8M2 8h20v4H2zM12 8v12M12 8H7.5A2.5 2.5 0 1 1 10 5.5C10 7 12 8 12 8ZM12 8h4.5A2.5 2.5 0 1 0 14 5.5C14 7 12 8 12 8Z" /></svg>;
     case "heart":
@@ -733,6 +760,61 @@ function LocationSection() {
   );
 }
 
+function GiftSection() {
+  const [copiedAccount, setCopiedAccount] = useState("");
+
+  const copyAccount = async (account) => {
+    await copyText(account);
+    setCopiedAccount(account);
+    window.setTimeout(() => setCopiedAccount((current) => (current === account ? "" : current)), 1800);
+  };
+
+  return (
+    <section id="gifts" className="relative overflow-hidden bg-[#f8f3e8] px-4 py-16 sm:px-5 sm:py-24">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#fffaf0] via-[#f8f3e8] to-[#edf3e7]" />
+      <FloralCorner className="absolute -left-24 top-4 h-80 w-80 rotate-180 text-[#71856b]/70" />
+      <FloralCorner className="absolute -bottom-28 -right-16 h-96 w-96 text-[#b48b3a]/45" />
+      <div className="relative mx-auto max-w-5xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionLabel>Wedding gift</SectionLabel>
+          <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Mừng cưới</h2>
+          <p className="mt-5 text-sm leading-7 text-[#5f684e]">Sự hiện diện của Quý khách là niềm vinh hạnh lớn nhất của gia đình. Nếu Quý khách muốn gửi lời chúc mừng qua hình thức chuyển khoản, xin vui lòng sử dụng thông tin dưới đây.</p>
+        </div>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {GIFT_ACCOUNTS.map((account) => {
+            const copied = copiedAccount === account.account;
+            return (
+              <motion.div key={account.account} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} className="relative overflow-hidden rounded-lg border border-white/80 bg-white/76 p-6 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl sm:p-7">
+                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full border border-[#d8c48b]/40" />
+                <div className="flex items-start gap-4">
+                  <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#42553d] text-white shadow-lg">
+                    <Icon name="gift" className="h-6 w-6" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#8d6f31]">{account.bank}</div>
+                    <div className="mt-2 font-serif text-3xl text-[#283b2c]">{account.name}</div>
+                  </div>
+                </div>
+
+                <div className="mt-6 rounded-md border border-[#e1d4b7] bg-[#fffaf0]/82 p-4">
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7d704a]">Số tài khoản</div>
+                  <div className="mt-2 break-all font-serif text-3xl text-[#40553d]">{account.account}</div>
+                </div>
+
+                <Button onClick={() => copyAccount(account.account)} variant={copied ? "solid" : "outline"} className="mt-5 w-full py-3.5">
+                  <Icon name={copied ? "check" : "copy"} className="h-4 w-4" />
+                  {copied ? "Đã copy số tài khoản" : "Copy số tài khoản"}
+                </Button>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function GallerySection() {
   const [active, setActive] = useState(null);
 
@@ -936,6 +1018,7 @@ function App() {
         <StorySection />
         <EventSection />
         <LocationSection />
+        <GiftSection />
         <GallerySection />
         <FamilyGuestbook onRsvp={() => setRsvpOpen(true)} />
       </main>
