@@ -63,7 +63,6 @@ const SCHEDULE = Object.freeze([
 
 const GALLERY = Object.freeze([
   ["SMA_0059", "portrait"],
-  ["SMA_0098", "portrait"],
   ["SMA_0102", "portrait"],
   ["SMA_0123", "portrait"],
   ["SMA_0163", "portrait"],
@@ -153,7 +152,7 @@ function runSelfTests() {
   console.assert(pad(-2) === "00", "pad: negative number should clamp to 00");
   const past = getCountdownParts(new Date("2026-01-01T00:00:00Z"), new Date("2026-01-02T00:00:00Z"));
   console.assert(past.days === 0 && past.hours === 0 && past.minutes === 0 && past.seconds === 0, "countdown: past target should clamp to zero");
-  console.assert(GALLERY.length === 41, "gallery: all 41 images should be listed");
+  console.assert(GALLERY.length === 40, "gallery: all 40 images should be listed");
 }
 
 if (typeof window !== "undefined") runSelfTests();
