@@ -48,11 +48,13 @@ const NAV_ITEMS = Object.freeze([
 ]);
 
 const STORY = Object.freeze([
-  ["12.2021", "Lần đầu gặp gỡ", "Một cuộc gặp rất bình thường, mở đầu cho một hành trình rất đặc biệt."],
-  ["02.2022", "Lần đầu hẹn hò", "Những buổi hẹn giản dị, những câu chuyện dài và sự đồng hành mỗi ngày."],
-  ["Bí mật", "Cầu hôn", "Một lời hứa nhẹ nhàng, đủ để hai người cùng bước sang chương mới."],
-  ["11.05.2026", "Về chung một nhà", "Ngày gia đình, bạn bè và những người thương cùng chứng kiến hạnh phúc."],
+  ["12.2021", "The First Meeting", "In an English class did our quiet chapter begin. We were but ordinary friends, trading lessons and borrowed answers, speaking seldom, yet somehow remembered."],
+  ["02.2022", "The First Date", "Upon a rain-kissed day, our first date came softly. Some gentle soul had said that rain may open the curtain to a romantic love, and so it did."],
+  ["Secret", "The Proposal", "One romantic evening, veiled in secrecy, a promise was offered. After four years of loving, the heart found courage enough to speak forever."],
+  ["11.05.2026", "One Home", "When every star and season had gathered in their proper place, we came home to one another, ready to build the morrow hand in hand."],
 ]);
+
+const STORY_QUOTE = "At last, we have reached the fair harbor of lovers' love; now this love shall grow wider still, and make room for all the life before us.";
 
 const SCHEDULE = Object.freeze([
   ["10:30", "Đón khách", "users"],
@@ -611,7 +613,7 @@ function StorySection() {
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-12 text-center">
           <SectionLabel>Love timeline</SectionLabel>
-          <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Câu chuyện tình yêu</h2>
+          <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Our Love Story</h2>
         </div>
         <div className="grid gap-5 md:grid-cols-4">
           {STORY.map(([date, title, text], index) => (
@@ -623,6 +625,9 @@ function StorySection() {
             </motion.button>
           ))}
         </div>
+        <motion.blockquote initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} className="mx-auto mt-10 max-w-4xl border-y border-[#d8c48b]/70 px-4 py-7 text-center font-serif text-2xl italic leading-relaxed text-[#40553d] sm:px-8 md:text-3xl">
+          "{STORY_QUOTE}"
+        </motion.blockquote>
       </div>
     </section>
   );
