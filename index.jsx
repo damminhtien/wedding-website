@@ -817,8 +817,14 @@ function GallerySection() {
 
 function FamilyGuestbook({ onRsvp }) {
   const [wishes, setWishes] = useState([
-    { name: "Minh Sơn", message: "Chúc hai bạn trăm năm hạnh phúc, luôn đồng hành và yêu thương nhau." },
-    { name: "Bạn thân", message: "Ngày vui thật đẹp. Hẹn gặp hai bạn tại Hạ Long!" },
+    { name: "Albert Einstein", message: "If love had an equation, today would be the proof: two hearts, one universe, and an infinite supply of cake." },
+    { name: "Marie Curie", message: "May your love glow brighter than radium, but with far fewer safety instructions and much better dancing." },
+    { name: "Abraham Lincoln", message: "May this union be of the two, by the two, for the two, and may it never perish from the dinner table." },
+    { name: "Winston Churchill", message: "Never surrender the last slice of wedding cake. Negotiate bravely, then share it with excellent manners." },
+    { name: "Charlie Chaplin", message: "A day without laughter is a day wasted; a marriage with laughter is a masterpiece in motion." },
+    { name: "Audrey Hepburn", message: "May elegance visit often, kindness stay for tea, and joy keep finding excuses to wear its best shoes." },
+    { name: "Nikola Tesla", message: "May your hearts keep perfect current: bright, a little electric, and powerful enough to light every room." },
+    { name: "Leonardo da Vinci", message: "Where art, patience, and curiosity meet, a beautiful future is drawn. Also, remember to eat before inventing." },
   ]);
   const [draft, setDraft] = useState({ name: "", message: "" });
 
