@@ -297,12 +297,12 @@ function CountdownCard() {
   const cells = [[days, "Ngày"], [hours, "Giờ"], [minutes, "Phút"], [seconds, "Giây"]];
 
   return (
-    <div className="border border-white/70 bg-white/70 p-5 text-center shadow-xl shadow-[#6b5b2e]/10 backdrop-blur-xl">
-      <div className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#42553d]">Đếm ngược đến ngày vui</div>
+    <div className="border border-white/70 bg-white/75 p-4 text-center shadow-xl shadow-[#6b5b2e]/10 backdrop-blur-xl sm:p-5">
+      <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#42553d] sm:text-xs sm:tracking-[0.22em]">Đếm ngược đến ngày vui</div>
       <div className="grid grid-cols-4 divide-x divide-[#c7b27a]/40">
         {cells.map(([value, label]) => (
           <div key={label} className="px-2 sm:px-3">
-            <motion.div key={`${label}-${value}`} initial={{ y: -8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="font-serif text-2xl text-[#283b2c] sm:text-3xl">
+            <motion.div key={`${label}-${value}`} initial={{ y: -8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="font-serif text-xl text-[#283b2c] sm:text-3xl">
               {label === "Ngày" ? value : pad(value)}
             </motion.div>
             <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-[#7d704a]">{label}</div>
@@ -359,7 +359,7 @@ function MusicControl() {
   };
 
   return (
-    <button type="button" onClick={toggle} className="group fixed bottom-5 left-5 z-40 grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-[#42553d]/90 text-white shadow-2xl backdrop-blur-xl transition hover:scale-105" aria-label={playing ? "Tắt nhạc" : "Bật nhạc"}>
+    <button type="button" onClick={toggle} className="group fixed bottom-24 left-5 z-40 grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-[#42553d]/90 text-white shadow-2xl backdrop-blur-xl transition hover:scale-105 md:bottom-5" aria-label={playing ? "Tắt nhạc" : "Bật nhạc"}>
       <Icon name={playing ? "pause" : "play"} className="h-5 w-5" />
     </button>
   );
@@ -428,7 +428,7 @@ function RsvpModal({ open, onClose }) {
 function Header({ onRsvp }) {
   return (
     <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/50 bg-[#fffaf0]/78 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:px-5 sm:py-3">
         <button type="button" onClick={() => smoothScroll("home")} className="group flex items-center gap-3">
           <div className="grid h-10 w-10 place-items-center rounded-full border border-[#d4be7b]/60 bg-white/75 font-serif text-base font-semibold text-[#b48b3a] shadow-sm">T&T</div>
           <div className="hidden text-left sm:block">
@@ -441,7 +441,7 @@ function Header({ onRsvp }) {
             <button key={id} type="button" onClick={() => smoothScroll(id)} className="text-xs font-semibold uppercase tracking-[0.16em] text-[#42553d] transition hover:text-[#b48b3a]">{label}</button>
           ))}
         </nav>
-        <Button onClick={onRsvp} variant="outline" className="px-4 py-2.5 text-[#8d6f31] shadow-lg shadow-[#81692d]/10"><Icon name="gift" className="h-4 w-4" /> RSVP</Button>
+        <Button onClick={onRsvp} variant="outline" className="px-3 py-2.5 text-[#8d6f31] shadow-lg shadow-[#81692d]/10 sm:px-4"><Icon name="gift" className="h-4 w-4" /> RSVP</Button>
       </div>
     </header>
   );
@@ -449,29 +449,32 @@ function Header({ onRsvp }) {
 
 function Hero({ onRsvp }) {
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-[#f8f3e8] pt-20">
-      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#fffaf0]/95 via-[#fffaf0]/74 to-[#283b2c]/30" />
+    <section id="home" className="relative min-h-screen overflow-hidden bg-[#f8f3e8] pt-16 sm:pt-20">
+      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover object-center" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffaf0]/96 via-[#fffaf0]/80 to-[#283b2c]/28 lg:bg-gradient-to-r" />
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#f8f3e8] to-transparent" />
       <FloralCorner className="absolute -left-24 top-16 h-80 w-80 rotate-180 text-[#71856b]" />
 
-      <div className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-10 px-5 py-12 lg:grid-cols-[0.96fr_1.04fr]">
+      <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.96fr_1.04fr]">
         <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#8d6f31] backdrop-blur"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
-          <h1 className="font-serif text-5xl font-semibold uppercase tracking-[0.12em] text-[#2f4232] md:text-7xl">Lễ Thành Hôn</h1>
-          <div className="mt-5 font-serif text-5xl italic leading-tight text-[#b48b3a] md:text-7xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/65 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8d6f31] backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.22em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
+          <h1 className="font-serif text-4xl font-semibold uppercase tracking-[0.08em] text-[#2f4232] sm:text-5xl md:text-7xl md:tracking-[0.12em]">Lễ Thành Hôn</h1>
+          <div className="mt-4 font-serif text-4xl italic leading-tight text-[#b48b3a] sm:mt-5 sm:text-5xl md:text-7xl">
             <div>{EVENT.groom}</div>
             <div className="text-3xl text-[#6b7758]">&</div>
             <div>{EVENT.bride}</div>
           </div>
-          <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <div className="rounded-md border border-white/70 bg-white/65 px-5 py-3 shadow-xl shadow-[#42553d]/5 backdrop-blur"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /><span className="font-serif text-2xl text-[#42553d]">{EVENT.dateText}</span></div>
-            <div className="rounded-md border border-white/70 bg-white/65 px-5 py-3 text-[#42553d] shadow-xl shadow-[#42553d]/5 backdrop-blur"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /> {EVENT.venue}</div>
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
+            <div className="rounded-md border border-white/70 bg-white/70 px-4 py-3 shadow-xl shadow-[#42553d]/5 backdrop-blur sm:px-5"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /><span className="font-serif text-xl text-[#42553d] sm:text-2xl">{EVENT.dateText}</span></div>
+            <div className="rounded-md border border-white/70 bg-white/70 px-4 py-3 text-sm leading-6 text-[#42553d] shadow-xl shadow-[#42553d]/5 backdrop-blur sm:px-5"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /> {EVENT.venue}</div>
           </div>
           <p className="mt-5 max-w-2xl text-sm leading-7 text-[#4f5d47] lg:text-base">Bữa cơm thân mật mừng lễ thành hôn được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại {EVENT.venue}, {EVENT.address}. Gia đình nhà gái tổ chức ngày <strong>10.05.2026</strong> tại Hội trường Happy Gold Palace, Trung tâm hội nghị Hoà Bình.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
-            <Button onClick={onRsvp} className="px-8 py-4">Gửi RSVP <Icon name="heart" className="h-4 w-4" /></Button>
-            <Button onClick={() => smoothScroll("gallery")} variant="outline" className="px-8 py-4">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
+          <div className="mt-7 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
+            <Button onClick={onRsvp} className="w-full px-8 py-4 sm:w-auto">Gửi RSVP <Icon name="heart" className="h-4 w-4" /></Button>
+            <Button onClick={() => smoothScroll("gallery")} variant="outline" className="w-full px-8 py-4 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
+          </div>
+          <div className="mx-auto mt-5 max-w-md lg:hidden">
+            <CountdownCard />
           </div>
         </motion.div>
 
@@ -489,7 +492,7 @@ function Hero({ onRsvp }) {
         </motion.div>
       </div>
 
-      <button type="button" onClick={() => smoothScroll("story")} className="absolute bottom-7 left-1/2 z-30 grid h-12 w-12 -translate-x-1/2 place-items-center rounded-full border border-white/80 bg-white/70 text-[#42553d] shadow-xl backdrop-blur" aria-label="Cuộn xuống">
+      <button type="button" onClick={() => smoothScroll("story")} className="absolute bottom-7 left-1/2 z-30 hidden h-12 w-12 -translate-x-1/2 place-items-center rounded-full border border-white/80 bg-white/70 text-[#42553d] shadow-xl backdrop-blur md:grid" aria-label="Cuộn xuống">
         <Icon name="chevron-down" className="h-5 w-5 animate-bounce" />
       </button>
     </section>
@@ -500,7 +503,7 @@ function StorySection() {
   const [selected, setSelected] = useState(0);
 
   return (
-    <section id="story" className="relative overflow-hidden bg-[#f8f3e8] px-5 py-24">
+    <section id="story" className="relative overflow-hidden bg-[#f8f3e8] px-4 py-16 sm:px-5 sm:py-24">
       <FloralCorner className="absolute -bottom-32 -left-24 h-96 w-96 rotate-12 text-[#71856b]" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-12 text-center">
@@ -524,7 +527,7 @@ function StorySection() {
 
 function EventSection() {
   return (
-    <section id="events" className="relative bg-[#fdf8ee] px-5 py-24">
+    <section id="events" className="relative bg-[#fdf8ee] px-4 py-16 sm:px-5 sm:py-24">
       <div className="absolute inset-0 bg-gradient-to-br from-[#fdf8ee] via-[#f8f1e1] to-[#e6eddc]" />
       <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
@@ -533,7 +536,7 @@ function EventSection() {
           <p className="mt-5 max-w-xl text-sm leading-7 text-[#5f684e]">Hai gia đình tổ chức cùng khung giờ. Lễ thành hôn bắt đầu lúc <strong>{EVENT.ceremonyTime}</strong>, bữa cơm thân mật lúc <strong>{EVENT.partyTime}</strong>.</p>
           <div className="mt-8 space-y-4">
             {WEDDING_EVENTS.map((event) => (
-              <div key={event.side} className="rounded-lg border border-white/70 bg-white/60 p-6 shadow-xl backdrop-blur-xl">
+              <div key={event.side} className="rounded-lg border border-white/70 bg-white/60 p-5 shadow-xl backdrop-blur-xl sm:p-6">
                 <div className="flex items-start gap-4">
                   <Icon name="calendar" className="mt-1 h-6 w-6 shrink-0 text-[#b48b3a]" />
                   <div>
@@ -549,10 +552,10 @@ function EventSection() {
         </div>
         <div className="space-y-4">
           {SCHEDULE.map(([time, title, icon], index) => (
-            <motion.div key={time} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ delay: index * 0.08 }} className="group flex items-center gap-5 rounded-lg border border-white/70 bg-white/70 p-5 shadow-xl shadow-[#42553d]/5 backdrop-blur-xl">
-              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#42553d] text-white shadow-lg transition group-hover:scale-105 group-hover:bg-[#b48b3a]"><Icon name={icon} className="h-6 w-6" /></div>
-              <div className="w-24 font-serif text-3xl text-[#b48b3a]">{time}</div>
-              <div className="text-lg font-medium text-[#283b2c]">{title}</div>
+            <motion.div key={time} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ delay: index * 0.08 }} className="group flex items-center gap-3 rounded-lg border border-white/70 bg-white/70 p-4 shadow-xl shadow-[#42553d]/5 backdrop-blur-xl sm:gap-5 sm:p-5">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#42553d] text-white shadow-lg transition group-hover:scale-105 group-hover:bg-[#b48b3a] sm:h-14 sm:w-14"><Icon name={icon} className="h-5 w-5 sm:h-6 sm:w-6" /></div>
+              <div className="w-16 shrink-0 font-serif text-2xl text-[#b48b3a] sm:w-24 sm:text-3xl">{time}</div>
+              <div className="text-base font-medium text-[#283b2c] sm:text-lg">{title}</div>
             </motion.div>
           ))}
         </div>
@@ -563,16 +566,16 @@ function EventSection() {
 
 function LocationSection() {
   return (
-    <section id="location" className="relative overflow-hidden bg-[#eef4e8] px-5 py-24">
+    <section id="location" className="relative overflow-hidden bg-[#eef4e8] px-4 py-16 sm:px-5 sm:py-24">
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#40553d]/18 to-transparent" />
       <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="flex flex-col justify-center">
           <SectionLabel>Location</SectionLabel>
           <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Địa điểm tổ chức</h2>
           <p className="mt-5 text-sm leading-7 text-[#5f684e]">Khách mời chọn đúng địa điểm theo lịch nhà gái hoặc nhà trai để mở bản đồ chỉ đường.</p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap sm:gap-4">
             {WEDDING_EVENTS.map((event) => (
-              <Button key={event.side} onClick={() => openMap(event)} className="px-7 py-4">
+              <Button key={event.side} onClick={() => openMap(event)} className="w-full px-7 py-4 sm:w-auto">
                 <Icon name="navigation" className="h-4 w-4" /> Chỉ đường {event.side}
               </Button>
             ))}
@@ -581,7 +584,7 @@ function LocationSection() {
         <div className="grid gap-5 md:grid-cols-2">
           {WEDDING_EVENTS.map((event, index) => (
             <div key={event.side} className="overflow-hidden rounded-lg border border-white/70 bg-white/60 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl">
-              <div className="relative h-[420px] overflow-hidden bg-[#dbe4d2]">
+              <div className="relative h-80 overflow-hidden bg-[#dbe4d2] sm:h-[420px]">
                 <div className="absolute inset-0 opacity-65">
                   <div className="absolute left-0 top-16 h-px w-full rotate-6 bg-[#9aa98e]" />
                   <div className="absolute left-0 top-48 h-px w-full -rotate-3 bg-[#9aa98e]" />
@@ -630,7 +633,7 @@ function GallerySection() {
   }, [active]);
 
   return (
-    <section id="gallery" className="bg-[#f8f3e8] px-5 py-24">
+    <section id="gallery" className="bg-[#f8f3e8] px-4 py-16 sm:px-5 sm:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
@@ -642,14 +645,14 @@ function GallerySection() {
 
         <div className="mb-8 grid gap-4 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
           {GALLERY.slice(0, 3).map((image, index) => (
-            <button key={image.id} type="button" onClick={() => setActive(index)} className={`group relative overflow-hidden rounded-lg border border-white/70 bg-white shadow-xl ${index === 0 ? "h-[460px]" : "h-[220px] md:h-[460px]"}`}>
+            <button key={image.id} type="button" onClick={() => setActive(index)} className={`group relative overflow-hidden rounded-lg border border-white/70 bg-white shadow-xl ${index === 0 ? "h-[340px] sm:h-[460px]" : "h-[190px] sm:h-[220px] md:h-[460px]"}`}>
               <img src={image.src} alt={image.alt} className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1b241d]/45 via-transparent to-transparent opacity-80" />
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" style={{ gridAutoRows: "9px" }}>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5" style={{ gridAutoRows: "clamp(7px, 0.7vw, 9px)" }}>
           {GALLERY.map((image, index) => (
             <motion.button
               key={image.id}
@@ -706,10 +709,10 @@ function FamilyGuestbook({ onRsvp }) {
   };
 
   return (
-    <section id="guestbook" className="relative overflow-hidden bg-[#fdf8ee] px-5 py-24">
+    <section id="guestbook" className="relative overflow-hidden bg-[#fdf8ee] px-4 py-16 sm:px-5 sm:py-24">
       <FloralCorner className="absolute -right-20 bottom-0 h-[30rem] w-[30rem] text-[#71856b]" />
       <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-lg border border-white/70 bg-white/64 p-8 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl">
+        <div className="rounded-lg border border-white/70 bg-white/64 p-5 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl sm:p-8">
           <SectionLabel>Family</SectionLabel>
           <h2 className="font-serif text-4xl text-[#283b2c]">Thông tin gia đình</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
@@ -725,7 +728,7 @@ function FamilyGuestbook({ onRsvp }) {
           <Button onClick={onRsvp} className="mt-7 w-full py-4">Xác nhận tham dự</Button>
         </div>
 
-        <div className="rounded-lg border border-white/70 bg-white/64 p-8 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl">
+        <div className="rounded-lg border border-white/70 bg-white/64 p-5 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl sm:p-8">
           <SectionLabel>Guestbook</SectionLabel>
           <h2 className="font-serif text-4xl text-[#283b2c]">Sổ lưu bút</h2>
           <form onSubmit={addWish} className="mt-7 grid gap-4 md:grid-cols-[0.8fr_1.2fr_auto]">
@@ -762,11 +765,26 @@ function Footer() {
   );
 }
 
+function MobileActionBar({ onRsvp }) {
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/60 bg-[#fffaf0]/92 px-4 py-3 shadow-[0_-10px_30px_rgba(40,59,44,0.14)] backdrop-blur-xl md:hidden">
+      <div className="mx-auto grid max-w-md grid-cols-2 gap-3">
+        <Button onClick={onRsvp} className="h-12 px-3 py-0">
+          <Icon name="heart" className="h-4 w-4" /> RSVP
+        </Button>
+        <Button onClick={() => smoothScroll("location")} variant="outline" className="h-12 px-3 py-0 bg-white">
+          <Icon name="map-pin" className="h-4 w-4" /> Địa điểm
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [rsvpOpen, setRsvpOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#f8f3e8] text-[#283b2c]">
+    <div className="min-h-screen bg-[#f8f3e8] pb-20 text-[#283b2c] md:pb-0">
       <style>{`
         html { scroll-behavior: smooth; }
         body { margin: 0; background: #f8f3e8; }
@@ -779,6 +797,7 @@ function App() {
       <Header onRsvp={() => setRsvpOpen(true)} />
       <Petals />
       <MusicControl />
+      <MobileActionBar onRsvp={() => setRsvpOpen(true)} />
       <main>
         <Hero onRsvp={() => setRsvpOpen(true)} />
         <StorySection />
