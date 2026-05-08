@@ -388,7 +388,7 @@ function EnvelopeIntro({ onDone }) {
 
   useEffect(() => {
     if (!opened) return undefined;
-    const timer = window.setTimeout(onDone, 1500);
+    const timer = window.setTimeout(onDone, 2400);
     return () => window.clearTimeout(timer);
   }, [opened, onDone]);
 
@@ -404,7 +404,7 @@ function EnvelopeIntro({ onDone }) {
       initial={{ opacity: 1 }}
       animate={{ opacity: opened ? 0 : 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.6, delay: opened ? 0.95 : 0 }}
+      transition={{ duration: 0.9, delay: opened ? 1.45 : 0 }}
       aria-label="Mở phong bao thiệp cưới"
     >
       <FloralCorner className="pointer-events-none absolute -left-20 -top-16 h-72 w-72 -rotate-12 text-[#71856b]/55" />
@@ -413,45 +413,51 @@ function EnvelopeIntro({ onDone }) {
 
       <div className="relative flex w-full max-w-md flex-col items-center">
         <motion.div
-          className="relative h-[300px] w-full max-w-[350px] sm:h-[330px] sm:max-w-[390px]"
-          initial={false}
-          animate={opened ? "open" : "closed"}
+          className="w-full max-w-[350px] sm:max-w-[390px]"
+          animate={opened ? { rotate: 0, y: 0 } : { rotate: [-0.6, 0.8, -0.4, 0.5, 0], y: [0, -3, 0, 2, 0] }}
+          transition={opened ? { duration: 0.35 } : { duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
         >
           <motion.div
-            className="absolute left-1/2 top-8 z-10 h-[220px] w-[78%] -translate-x-1/2 overflow-hidden rounded-md border border-[#e8d7ad] bg-[#fffaf0] p-6 text-center shadow-2xl shadow-[#6b5b2e]/18"
-            variants={{
-              closed: { y: 72, scale: 0.96, rotate: 0 },
-              open: { y: -34, scale: 1, rotate: -1.5 },
-            }}
-            transition={{ type: "spring", stiffness: 110, damping: 17 }}
+            className="relative h-[300px] w-full sm:h-[330px]"
+            initial={false}
+            animate={opened ? "open" : "closed"}
           >
-            <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full border border-[#dfc37d] bg-[#f7ecd0] text-[#b48b3a]">
-              <Icon name="heart" className="h-6 w-6" filled />
-            </div>
-            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b48b3a]">Thiệp mời</div>
-            <div className="mt-3 font-serif text-4xl italic text-[#40553d]">Tiến & Thuỳ</div>
-            <div className="mt-3 text-sm font-semibold text-[#7d704a]">10.05 & 11.05.2026</div>
-            <div className="mx-auto mt-5 h-px w-24 bg-[#dfc37d]" />
-          </motion.div>
-
-          <div className="absolute bottom-8 left-0 right-0 h-[210px] rounded-lg border border-[#d8c18a] bg-[#ead7a8] shadow-2xl shadow-[#6b5b2e]/20">
-            <div className="absolute inset-x-0 bottom-0 h-[150px] rounded-b-lg bg-[#dec58f]" />
-            <div className="absolute inset-x-0 bottom-0 h-[172px] rounded-b-lg bg-[#e6d09c] [clip-path:polygon(0_0,50%_55%,100%_0,100%_100%,0_100%)]" />
-            <div className="absolute bottom-0 left-0 h-[172px] w-1/2 rounded-bl-lg bg-[#d6bd83] [clip-path:polygon(0_0,100%_55%,100%_100%,0_100%)]" />
-            <div className="absolute bottom-0 right-0 h-[172px] w-1/2 rounded-br-lg bg-[#e8d3a1] [clip-path:polygon(0_55%,100%_0,100%_100%,0_100%)]" />
             <motion.div
-              className="absolute left-0 right-0 top-0 z-20 h-[132px] origin-top rounded-t-lg bg-[#f0dfb8] [clip-path:polygon(0_0,100%_0,50%_100%)]"
+              className="absolute left-1/2 top-8 z-10 h-[220px] w-[78%] -translate-x-1/2 overflow-hidden rounded-md border border-[#e8d7ad] bg-[#fffaf0] p-6 text-center shadow-2xl shadow-[#6b5b2e]/18"
               variants={{
-                closed: { rotateX: 0, y: 0 },
-                open: { rotateX: -162, y: -8 },
+                closed: { y: 72, scale: 0.96, rotate: 0 },
+                open: { y: -50, scale: 1, rotate: -1.2 },
               }}
-              transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
-              style={{ transformPerspective: 900 }}
-            />
-            <div className="absolute left-1/2 top-[104px] z-30 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full border border-[#dfc37d] bg-[#40553d] text-[#f7ecd0] shadow-lg">
-              <Icon name="heart" className="h-7 w-7" filled />
+              transition={{ type: "spring", stiffness: 68, damping: 18, mass: 0.95, delay: opened ? 0.18 : 0 }}
+            >
+              <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full border border-[#dfc37d] bg-[#f7ecd0] text-[#b48b3a]">
+                <Icon name="heart" className="h-6 w-6" filled />
+              </div>
+              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b48b3a]">Thiệp mời</div>
+              <div className="mt-3 font-serif text-4xl italic text-[#40553d]">Tiến & Thuỳ</div>
+              <div className="mt-3 text-sm font-semibold text-[#7d704a]">10.05 & 11.05.2026</div>
+              <div className="mx-auto mt-5 h-px w-24 bg-[#dfc37d]" />
+            </motion.div>
+
+            <div className="absolute bottom-8 left-0 right-0 h-[210px] rounded-lg border border-[#d8c18a] bg-[#ead7a8] shadow-2xl shadow-[#6b5b2e]/20">
+              <div className="absolute inset-x-0 bottom-0 h-[150px] rounded-b-lg bg-[#dec58f]" />
+              <div className="absolute inset-x-0 bottom-0 h-[172px] rounded-b-lg bg-[#e6d09c] [clip-path:polygon(0_0,50%_55%,100%_0,100%_100%,0_100%)]" />
+              <div className="absolute bottom-0 left-0 h-[172px] w-1/2 rounded-bl-lg bg-[#d6bd83] [clip-path:polygon(0_0,100%_55%,100%_100%,0_100%)]" />
+              <div className="absolute bottom-0 right-0 h-[172px] w-1/2 rounded-br-lg bg-[#e8d3a1] [clip-path:polygon(0_55%,100%_0,100%_100%,0_100%)]" />
+              <motion.div
+                className="absolute left-0 right-0 top-0 z-20 h-[132px] origin-top rounded-t-lg bg-[#f0dfb8] [clip-path:polygon(0_0,100%_0,50%_100%)]"
+                variants={{
+                  closed: { rotateX: 0, y: 0 },
+                  open: { rotateX: -162, y: -8 },
+                }}
+                transition={{ duration: 1.22, ease: [0.16, 1, 0.3, 1] }}
+                style={{ transformPerspective: 900 }}
+              />
+              <div className="absolute left-1/2 top-[104px] z-30 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full border border-[#dfc37d] bg-[#40553d] text-[#f7ecd0] shadow-lg">
+                <Icon name="heart" className="h-7 w-7" filled />
+              </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         <motion.button
@@ -460,7 +466,8 @@ function EnvelopeIntro({ onDone }) {
           disabled={opened}
           className="relative z-10 mt-2 inline-flex h-12 min-w-40 items-center justify-center gap-2 rounded-md bg-[#40553d] px-6 text-sm font-semibold text-white shadow-lg shadow-[#40553d]/20 transition hover:bg-[#344530] disabled:opacity-70"
           initial={false}
-          animate={{ opacity: opened ? 0 : 1, y: opened ? 12 : 0 }}
+          animate={{ opacity: opened ? 0 : 1, y: opened ? 16 : 0 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
         >
           <Icon name="sparkles" className="h-4 w-4" />
           Mở thiệp
