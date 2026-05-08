@@ -335,6 +335,24 @@ function MusicControl() {
     return () => audio.pause();
   }, []);
 
+  useEffect(() => {
+    const playFromInvitation = async () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      try {
+        audio.volume = 0.55;
+        await audio.play();
+        setPlaying(true);
+      } catch {
+        setPlaying(false);
+      }
+    };
+
+    window.addEventListener("wedding:open-invitation", playFromInvitation);
+    return () => window.removeEventListener("wedding:open-invitation", playFromInvitation);
+  }, []);
+
   const toggle = async () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -361,6 +379,93 @@ function MusicControl() {
         <Icon name={playing ? "pause" : "play"} className="h-5 w-5" />
       </button>
     </>
+  );
+}
+
+function EnvelopeIntro({ onDone }) {
+  const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    if (!opened) return undefined;
+    const timer = window.setTimeout(onDone, 1500);
+    return () => window.clearTimeout(timer);
+  }, [opened, onDone]);
+
+  const openInvitation = () => {
+    if (opened) return;
+    window.dispatchEvent(new Event("wedding:open-invitation"));
+    setOpened(true);
+  };
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[80] grid place-items-center overflow-hidden bg-[#f8f3e8] px-5 text-[#283b2c]"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: opened ? 0 : 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, delay: opened ? 0.95 : 0 }}
+      aria-label="Mở phong bao thiệp cưới"
+    >
+      <FloralCorner className="pointer-events-none absolute -left-20 -top-16 h-72 w-72 -rotate-12 text-[#71856b]/55" />
+      <FloralCorner className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-180 text-[#b48b3a]/45" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.88),transparent_38%),linear-gradient(180deg,rgba(248,243,232,0.28),rgba(216,196,144,0.24))]" />
+
+      <div className="relative flex w-full max-w-md flex-col items-center">
+        <motion.div
+          className="relative h-[300px] w-full max-w-[350px] sm:h-[330px] sm:max-w-[390px]"
+          initial={false}
+          animate={opened ? "open" : "closed"}
+        >
+          <motion.div
+            className="absolute left-1/2 top-8 z-10 h-[220px] w-[78%] -translate-x-1/2 overflow-hidden rounded-md border border-[#e8d7ad] bg-[#fffaf0] p-6 text-center shadow-2xl shadow-[#6b5b2e]/18"
+            variants={{
+              closed: { y: 72, scale: 0.96, rotate: 0 },
+              open: { y: -34, scale: 1, rotate: -1.5 },
+            }}
+            transition={{ type: "spring", stiffness: 110, damping: 17 }}
+          >
+            <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full border border-[#dfc37d] bg-[#f7ecd0] text-[#b48b3a]">
+              <Icon name="heart" className="h-6 w-6" filled />
+            </div>
+            <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b48b3a]">Thiệp mời</div>
+            <div className="mt-3 font-serif text-4xl italic text-[#40553d]">Tiến & Thuỳ</div>
+            <div className="mt-3 text-sm font-semibold text-[#7d704a]">10.05 & 11.05.2026</div>
+            <div className="mx-auto mt-5 h-px w-24 bg-[#dfc37d]" />
+          </motion.div>
+
+          <div className="absolute bottom-8 left-0 right-0 h-[210px] rounded-lg border border-[#d8c18a] bg-[#ead7a8] shadow-2xl shadow-[#6b5b2e]/20">
+            <div className="absolute inset-x-0 bottom-0 h-[150px] rounded-b-lg bg-[#dec58f]" />
+            <div className="absolute inset-x-0 bottom-0 h-[172px] rounded-b-lg bg-[#e6d09c] [clip-path:polygon(0_0,50%_55%,100%_0,100%_100%,0_100%)]" />
+            <div className="absolute bottom-0 left-0 h-[172px] w-1/2 rounded-bl-lg bg-[#d6bd83] [clip-path:polygon(0_0,100%_55%,100%_100%,0_100%)]" />
+            <div className="absolute bottom-0 right-0 h-[172px] w-1/2 rounded-br-lg bg-[#e8d3a1] [clip-path:polygon(0_55%,100%_0,100%_100%,0_100%)]" />
+            <motion.div
+              className="absolute left-0 right-0 top-0 z-20 h-[132px] origin-top rounded-t-lg bg-[#f0dfb8] [clip-path:polygon(0_0,100%_0,50%_100%)]"
+              variants={{
+                closed: { rotateX: 0, y: 0 },
+                open: { rotateX: -162, y: -8 },
+              }}
+              transition={{ duration: 0.82, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformPerspective: 900 }}
+            />
+            <div className="absolute left-1/2 top-[104px] z-30 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full border border-[#dfc37d] bg-[#40553d] text-[#f7ecd0] shadow-lg">
+              <Icon name="heart" className="h-7 w-7" filled />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.button
+          type="button"
+          onClick={openInvitation}
+          disabled={opened}
+          className="relative z-10 mt-2 inline-flex h-12 min-w-40 items-center justify-center gap-2 rounded-md bg-[#40553d] px-6 text-sm font-semibold text-white shadow-lg shadow-[#40553d]/20 transition hover:bg-[#344530] disabled:opacity-70"
+          initial={false}
+          animate={{ opacity: opened ? 0 : 1, y: opened ? 12 : 0 }}
+        >
+          <Icon name="sparkles" className="h-4 w-4" />
+          Mở thiệp
+        </motion.button>
+      </div>
+    </motion.div>
   );
 }
 
@@ -781,6 +886,7 @@ function MobileActionBar({ onRsvp }) {
 
 function App() {
   const [rsvpOpen, setRsvpOpen] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#f8f3e8] pb-20 text-[#283b2c] md:pb-0">
@@ -796,6 +902,9 @@ function App() {
       <Header onRsvp={() => setRsvpOpen(true)} />
       <Petals />
       <MusicControl />
+      <AnimatePresence>
+        {!introDone && <EnvelopeIntro onDone={() => setIntroDone(true)} />}
+      </AnimatePresence>
       <MobileActionBar onRsvp={() => setRsvpOpen(true)} />
       <main>
         <Hero onRsvp={() => setRsvpOpen(true)} />
