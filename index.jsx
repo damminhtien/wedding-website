@@ -16,6 +16,28 @@ const EVENT = Object.freeze({
   brideFamily: ["Nguyễn Văn Xuân", "Trần Thị Thanh Thao"],
 });
 
+const WEDDING_EVENTS = Object.freeze([
+  {
+    side: "Nhà gái",
+    dateText: "10.05.2026",
+    venue: "Hội trường Happy Gold Palace",
+    address: "Trung tâm hội nghị Hoà Bình",
+    mapUrl: "https://maps.app.goo.gl/DURjH1w5pXL9s2HD7",
+    ceremonyTime: EVENT.ceremonyTime,
+    partyTime: EVENT.partyTime,
+  },
+  {
+    side: "Nhà trai",
+    dateText: EVENT.dateText,
+    lunarDate: EVENT.lunarDate,
+    venue: EVENT.venue,
+    address: EVENT.address,
+    mapUrl: "https://maps.app.goo.gl/chcQ7yRCViXh5yMC8",
+    ceremonyTime: EVENT.ceremonyTime,
+    partyTime: EVENT.partyTime,
+  },
+]);
+
 const NAV_ITEMS = Object.freeze([
   ["home", "Trang chủ"],
   ["story", "Câu chuyện"],
@@ -151,8 +173,13 @@ function smoothScroll(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function openMap() {
-  const query = encodeURIComponent(`${EVENT.venue} ${EVENT.address}`);
+function openMap(event = WEDDING_EVENTS[1]) {
+  if (event.mapUrl) {
+    window.open(event.mapUrl, "_blank", "noopener,noreferrer");
+    return;
+  }
+
+  const query = encodeURIComponent(`${event.venue} ${event.address}`);
   window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, "_blank", "noopener,noreferrer");
 }
 
@@ -441,7 +468,7 @@ function Hero({ onRsvp }) {
             <div className="rounded-md border border-white/70 bg-white/65 px-5 py-3 shadow-xl shadow-[#42553d]/5 backdrop-blur"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /><span className="font-serif text-2xl text-[#42553d]">{EVENT.dateText}</span></div>
             <div className="rounded-md border border-white/70 bg-white/65 px-5 py-3 text-[#42553d] shadow-xl shadow-[#42553d]/5 backdrop-blur"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /> {EVENT.venue}</div>
           </div>
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-[#4f5d47] lg:text-base">Bữa cơm thân mật mừng lễ thành hôn được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại {EVENT.venue}, {EVENT.address}.</p>
+          <p className="mt-5 max-w-2xl text-sm leading-7 text-[#4f5d47] lg:text-base">Bữa cơm thân mật mừng lễ thành hôn được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại {EVENT.venue}, {EVENT.address}. Gia đình nhà gái tổ chức ngày <strong>10.05.2026</strong> tại Hội trường Happy Gold Palace, Trung tâm hội nghị Hoà Bình.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
             <Button onClick={onRsvp} className="px-8 py-4">Gửi RSVP <Icon name="heart" className="h-4 w-4" /></Button>
             <Button onClick={() => smoothScroll("gallery")} variant="outline" className="px-8 py-4">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
@@ -503,15 +530,21 @@ function EventSection() {
         <div>
           <SectionLabel>Wedding day</SectionLabel>
           <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Lịch trình ngày cưới</h2>
-          <p className="mt-5 max-w-xl text-sm leading-7 text-[#5f684e]">Lễ thành hôn bắt đầu lúc <strong>{EVENT.ceremonyTime}</strong>. Bữa cơm thân mật được tổ chức lúc <strong>{EVENT.partyTime}</strong>, cùng ngày {EVENT.dateText}.</p>
-          <div className="mt-8 rounded-lg border border-white/70 bg-white/60 p-6 shadow-xl backdrop-blur-xl">
-            <div className="flex items-start gap-4">
-              <Icon name="calendar" className="mt-1 h-6 w-6 text-[#b48b3a]" />
-              <div>
-                <div className="font-serif text-2xl text-[#42553d]">Thứ Hai, {EVENT.dateText}</div>
-                <div className="mt-1 text-sm text-[#6d745d]">Tức ngày {EVENT.lunarDate}</div>
+          <p className="mt-5 max-w-xl text-sm leading-7 text-[#5f684e]">Hai gia đình tổ chức cùng khung giờ. Lễ thành hôn bắt đầu lúc <strong>{EVENT.ceremonyTime}</strong>, bữa cơm thân mật lúc <strong>{EVENT.partyTime}</strong>.</p>
+          <div className="mt-8 space-y-4">
+            {WEDDING_EVENTS.map((event) => (
+              <div key={event.side} className="rounded-lg border border-white/70 bg-white/60 p-6 shadow-xl backdrop-blur-xl">
+                <div className="flex items-start gap-4">
+                  <Icon name="calendar" className="mt-1 h-6 w-6 shrink-0 text-[#b48b3a]" />
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#8d6f31]">{event.side}</div>
+                    <div className="mt-1 font-serif text-2xl text-[#42553d]">{event.dateText}</div>
+                    {event.lunarDate && <div className="mt-1 text-sm text-[#6d745d]">Tức ngày {event.lunarDate}</div>}
+                    <div className="mt-3 text-sm leading-6 text-[#5f684e]">{event.venue} - {event.address}</div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className="space-y-4">
@@ -532,32 +565,42 @@ function LocationSection() {
   return (
     <section id="location" className="relative overflow-hidden bg-[#eef4e8] px-5 py-24">
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#40553d]/18 to-transparent" />
-      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="overflow-hidden rounded-lg border border-white/70 bg-white/60 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl">
-          <div className="relative h-[420px] overflow-hidden bg-[#dbe4d2]">
-            <div className="absolute inset-0 opacity-65">
-              <div className="absolute left-0 top-16 h-px w-full rotate-6 bg-[#9aa98e]" />
-              <div className="absolute left-0 top-48 h-px w-full -rotate-3 bg-[#9aa98e]" />
-              <div className="absolute left-0 top-72 h-px w-full rotate-2 bg-[#9aa98e]" />
-              <div className="absolute left-20 top-0 h-full w-px rotate-12 bg-[#9aa98e]" />
-              <div className="absolute left-64 top-0 h-full w-px -rotate-6 bg-[#9aa98e]" />
-              <div className="absolute right-32 top-0 h-full w-px rotate-6 bg-[#9aa98e]" />
-            </div>
-            <motion.div animate={{ scale: [1, 1.08, 1] }} transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }} className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#b48b3a] text-white shadow-2xl shadow-[#b48b3a]/40"><Icon name="map-pin" filled className="h-9 w-9" /></motion.div>
-            <div className="absolute bottom-6 left-6 right-6 rounded-lg border border-white/80 bg-white/78 p-5 shadow-xl backdrop-blur-xl">
-              <div className="font-serif text-2xl text-[#283b2c]">{EVENT.venue}</div>
-              <div className="mt-2 text-sm leading-6 text-[#5f684e]">{EVENT.address}</div>
-            </div>
-          </div>
-        </div>
+      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="flex flex-col justify-center">
           <SectionLabel>Location</SectionLabel>
           <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Địa điểm tổ chức</h2>
-          <p className="mt-5 text-sm leading-7 text-[#5f684e]">Khách mời có thể mở bản đồ và tìm tuyến đường đến Hội trường A - Hồ Cô Tiên.</p>
+          <p className="mt-5 text-sm leading-7 text-[#5f684e]">Khách mời chọn đúng địa điểm theo lịch nhà gái hoặc nhà trai để mở bản đồ chỉ đường.</p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Button onClick={openMap} className="px-7 py-4"><Icon name="navigation" className="h-4 w-4" /> Chỉ đường</Button>
-            <Button onClick={() => smoothScroll("guestbook")} variant="outline" className="px-7 py-4">Gửi lời chúc</Button>
+            {WEDDING_EVENTS.map((event) => (
+              <Button key={event.side} onClick={() => openMap(event)} className="px-7 py-4">
+                <Icon name="navigation" className="h-4 w-4" /> Chỉ đường {event.side}
+              </Button>
+            ))}
           </div>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          {WEDDING_EVENTS.map((event, index) => (
+            <div key={event.side} className="overflow-hidden rounded-lg border border-white/70 bg-white/60 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl">
+              <div className="relative h-[420px] overflow-hidden bg-[#dbe4d2]">
+                <div className="absolute inset-0 opacity-65">
+                  <div className="absolute left-0 top-16 h-px w-full rotate-6 bg-[#9aa98e]" />
+                  <div className="absolute left-0 top-48 h-px w-full -rotate-3 bg-[#9aa98e]" />
+                  <div className="absolute left-0 top-72 h-px w-full rotate-2 bg-[#9aa98e]" />
+                  <div className="absolute left-20 top-0 h-full w-px rotate-12 bg-[#9aa98e]" />
+                  <div className="absolute left-64 top-0 h-full w-px -rotate-6 bg-[#9aa98e]" />
+                  <div className="absolute right-32 top-0 h-full w-px rotate-6 bg-[#9aa98e]" />
+                </div>
+                <motion.div animate={{ scale: [1, 1.08, 1] }} transition={{ duration: 2.4 + index * 0.3, repeat: Infinity, ease: "easeInOut" }} className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#b48b3a] text-white shadow-2xl shadow-[#b48b3a]/40">
+                  <Icon name="map-pin" filled className="h-9 w-9" />
+                </motion.div>
+                <div className="absolute bottom-6 left-6 right-6 rounded-lg border border-white/80 bg-white/78 p-5 shadow-xl backdrop-blur-xl">
+                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#8d6f31]">{event.side} · {event.dateText}</div>
+                  <div className="mt-2 font-serif text-2xl text-[#283b2c]">{event.venue}</div>
+                  <div className="mt-2 text-sm leading-6 text-[#5f684e]">{event.address}</div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -713,7 +756,7 @@ function Footer() {
       <div className="relative mx-auto max-w-3xl">
         <div className="font-serif text-5xl italic text-[#f4d78d]">Tiến & Thuỳ</div>
         <p className="mt-4 text-sm leading-7 text-white/80">Cảm ơn Quý khách đã dành thời gian chung vui cùng gia đình.</p>
-        <div className="mt-6 text-xs uppercase tracking-[0.24em] text-white/70">{EVENT.dateText} · {EVENT.venue}</div>
+        <div className="mt-6 text-xs uppercase tracking-[0.24em] text-white/70">10.05.2026 · Happy Gold Palace / {EVENT.dateText} · {EVENT.venue}</div>
       </div>
     </footer>
   );
