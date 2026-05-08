@@ -48,10 +48,10 @@ const NAV_ITEMS = Object.freeze([
 ]);
 
 const STORY = Object.freeze([
-  ["12.2021", "The First Meeting", "In an English class did our quiet chapter begin. We were but ordinary friends, trading lessons and borrowed answers, speaking seldom, yet somehow remembered."],
-  ["02.2022", "The First Date", "Upon a rain-kissed day, our first date came softly. Some gentle soul had said that rain may open the curtain to a romantic love, and so it did."],
-  ["Secret", "The Proposal", "One romantic evening, veiled in secrecy, a promise was offered. After four years of loving, the heart found courage enough to speak forever."],
-  ["11.05.2026", "One Home", "When every star and season had gathered in their proper place, we came home to one another, ready to build the morrow hand in hand."],
+  ["12.2021", "The First Meeting", "In an English class did our quiet chapter begin. We were but ordinary friends, trading lessons and borrowed answers, speaking seldom, yet somehow remembered.", "book-open"],
+  ["02.2022", "The First Date", "Upon a rain-kissed day, our first date came softly. Some gentle soul had said that rain may open the curtain to a romantic love, and so it did.", "umbrella"],
+  ["Secret", "The Proposal", "One romantic evening, veiled in secrecy, a promise was offered. After four years of loving, the heart found courage enough to speak forever.", "ring"],
+  ["11.05.2026", "One Home", "When every star and season had gathered in their proper place, we came home to one another, ready to build the morrow hand in hand.", "home"],
 ]);
 
 const STORY_QUOTE = "At last, we have reached the fair harbor of lovers' love; now this love shall grow wider still, and make room for all the life before us.";
@@ -197,6 +197,8 @@ function Icon({ name, className = "", filled = false }) {
   };
 
   switch (name) {
+    case "book-open":
+      return <svg {...common}><path d="M12 7v14" /><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H12v17H7.5A3.5 3.5 0 0 0 4 22V5.5Z" /><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H12v17h4.5A3.5 3.5 0 0 1 20 22V5.5Z" /></svg>;
     case "calendar":
       return <svg {...common}><path d="M7 3v4M17 3v4M4 9h16M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" /><path d="M8 13h2M14 13h2M8 17h2M14 17h2" /></svg>;
     case "camera":
@@ -211,6 +213,8 @@ function Icon({ name, className = "", filled = false }) {
       return <svg {...common}><path d="M20 12v8H4v-8M2 8h20v4H2zM12 8v12M12 8H7.5A2.5 2.5 0 1 1 10 5.5C10 7 12 8 12 8ZM12 8h4.5A2.5 2.5 0 1 0 14 5.5C14 7 12 8 12 8Z" /></svg>;
     case "heart":
       return <svg {...common}><path d="M20.8 5.8a5.1 5.1 0 0 0-7.2 0L12 7.4l-1.6-1.6a5.1 5.1 0 0 0-7.2 7.2L12 21.8l8.8-8.8a5.1 5.1 0 0 0 0-7.2Z" /></svg>;
+    case "home":
+      return <svg {...common}><path d="m3 11 9-8 9 8" /><path d="M5 10v10h14V10" /><path d="M9 20v-6h6v6" /></svg>;
     case "map-pin":
       return <svg {...common}><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z" /><circle cx="12" cy="9" r="2.4" /></svg>;
     case "music":
@@ -221,10 +225,14 @@ function Icon({ name, className = "", filled = false }) {
       return <svg {...common}><path d="M8 5v14M16 5v14" /></svg>;
     case "play":
       return <svg {...common}><path d="m8 5 11 7-11 7V5Z" /></svg>;
+    case "ring":
+      return <svg {...common}><path d="M9 3h6l2 4-5 4-5-4 2-4Z" /><circle cx="12" cy="16" r="5" /></svg>;
     case "send":
       return <svg {...common}><path d="m22 2-7 20-4-9-9-4 20-7Z" /><path d="M22 2 11 13" /></svg>;
     case "sparkles":
       return <svg {...common}><path d="M12 3 10 9l-6 2 6 2 2 6 2-6 6-2-6-2-2-6ZM19 16l-.8 2.2L16 19l2.2.8L19 22l.8-2.2L22 19l-2.2-.8L19 16ZM5 2l-.7 2.3L2 5l2.3.7L5 8l.7-2.3L8 5l-2.3-.7L5 2Z" /></svg>;
+    case "umbrella":
+      return <svg {...common}><path d="M4 12a8 8 0 0 1 16 0Z" /><path d="M12 12v6a3 3 0 0 0 6 0" /><path d="M12 4v2" /></svg>;
     case "users":
       return <svg {...common}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
     case "wine":
@@ -623,9 +631,9 @@ function StorySection() {
           <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Our Love Story</h2>
         </div>
         <div className="grid gap-5 md:grid-cols-4">
-          {STORY.map(([date, title, text], index) => (
+          {STORY.map(([date, title, text, icon], index) => (
             <motion.button key={date} type="button" onClick={() => setSelected(index)} whileHover={{ y: -6 }} className={`relative rounded-lg border p-5 text-left shadow-xl transition ${selected === index ? "border-[#c4a052] bg-white/88" : "border-white/70 bg-white/55 hover:bg-white/80"} backdrop-blur-xl`}>
-              <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-[#42553d] text-white shadow-lg"><Icon name="heart" filled className="h-5 w-5" /></div>
+              <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-[#42553d] text-white shadow-lg"><Icon name={icon} className="h-6 w-6" /></div>
               <div className="font-serif text-2xl text-[#42553d]">{date}</div>
               <div className="mt-2 text-sm font-bold uppercase tracking-[0.14em] text-[#8d6f31]">{title}</div>
               <p className="mt-4 text-sm leading-6 text-[#5f684e]">{text}</p>
