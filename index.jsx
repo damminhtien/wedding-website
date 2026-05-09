@@ -122,7 +122,7 @@ const GALLERY = Object.freeze([
 const HERO_IMAGE = "/assets/images-optimized/large/SMA_1244.webp";
 const FEATURED_IMAGES = Object.freeze([
   "/assets/images-optimized/thumbs/SMA_0059.webp",
-  "/assets/images-optimized/thumbs/SMA_2330.webp",
+  "/assets/images-optimized/thumbs/SMA_1461.webp",
   "/assets/images-optimized/thumbs/SMA_9998.webp",
 ]);
 
@@ -545,7 +545,7 @@ function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/75 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8d6f31] shadow-sm backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.16em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
-          <h1 className="whitespace-nowrap font-serif text-[clamp(2.05rem,8.6vw,4.7rem)] font-semibold uppercase tracking-[0.035em] text-[#1f3024] sm:tracking-[0.07em] lg:tracking-[0.09em]" style={{ WebkitTextStroke: "0.7px rgba(255, 250, 240, 0.88)", textShadow: "0 2px 18px rgba(255, 250, 240, 0.94), 0 2px 4px rgba(40, 59, 44, 0.28)" }}>Lễ Thành Hôn</h1>
+          <h1 className="inline-block whitespace-nowrap rounded-md border border-[#d8c48b]/70 bg-[#fffaf0]/82 px-3 py-1 font-serif text-[clamp(2.05rem,8.6vw,4.7rem)] font-semibold uppercase tracking-[0.035em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.07em] lg:tracking-[0.09em]" style={{ WebkitTextStroke: "1px rgba(255, 250, 240, 0.96)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.34)" }}>Lễ Thành Hôn</h1>
           <div className="mt-4 font-serif text-[clamp(2.45rem,10vw,4.7rem)] italic leading-[1.06] text-[#b48b3a] sm:mt-5">
             <div>{EVENT.groom}</div>
             <div className="text-3xl leading-none text-[#6b7758] sm:text-4xl">&</div>
@@ -553,8 +553,8 @@ function Hero() {
           </div>
 
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
-            <div className="rounded-md border border-white/80 bg-white/88 px-4 py-3 shadow-xl shadow-[#42553d]/5 backdrop-blur-md sm:px-5"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /><span className="font-serif text-xl text-[#42553d] sm:text-2xl">{EVENT.dateText}</span></div>
-            <div className="rounded-md border border-white/80 bg-white/88 px-4 py-3 text-sm leading-6 text-[#42553d] shadow-xl shadow-[#42553d]/5 backdrop-blur-md sm:px-5"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /> {EVENT.venue}</div>
+            <div className="rounded-md border border-[#d8c48b]/70 bg-[#fffaf0]/94 px-4 py-3 font-serif text-xl text-[#263829] shadow-xl shadow-[#42553d]/10 backdrop-blur-xl sm:px-5 sm:text-2xl"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" />{EVENT.dateText}</div>
+            <div className="rounded-md border border-[#d8c48b]/70 bg-[#fffaf0]/94 px-4 py-3 font-serif text-xl leading-7 text-[#263829] shadow-xl shadow-[#42553d]/10 backdrop-blur-xl sm:px-5 sm:text-2xl"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" />{EVENT.venue}</div>
           </div>
 
           <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
