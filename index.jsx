@@ -512,67 +512,7 @@ function EnvelopeIntro({ onDone }) {
   );
 }
 
-function RsvpModal({ open, onClose }) {
-  const [form, setForm] = useState({ name: "", guests: "1", note: "" });
-  const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (open) setSubmitted(false);
-  }, [open]);
-
-  const submit = (event) => {
-    event.preventDefault();
-    setSubmitted(true);
-  };
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div className="fixed inset-0 z-50 grid place-items-center bg-[#1b241d]/55 p-4 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <motion.div initial={{ scale: 0.94, y: 24, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} exit={{ scale: 0.96, y: 20, opacity: 0 }} className="relative w-full max-w-lg overflow-hidden rounded-lg border border-white/70 bg-[#fffaf0] p-7 shadow-2xl">
-            <button type="button" onClick={onClose} className="absolute right-5 top-5 rounded-full bg-white/80 p-2 text-[#42553d] shadow" aria-label="Đóng">
-              <Icon name="x" className="h-4 w-4" />
-            </button>
-            <FloralCorner className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 text-[#71856b]" />
-            {!submitted ? (
-              <form onSubmit={submit} className="relative space-y-5">
-                <div>
-                  <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-[#b48b3a]"><Icon name="sparkles" className="h-4 w-4" /> RSVP</div>
-                  <h2 className="font-serif text-3xl text-[#283b2c]">Xác nhận tham dự</h2>
-                  <p className="mt-2 text-sm leading-6 text-[#5f684e]">Gia đình rất hân hạnh được đón tiếp Quý khách trong ngày vui.</p>
-                </div>
-                <label className="block text-sm font-medium text-[#42553d]">
-                  Tên khách mời
-                  <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-2 w-full rounded-md border border-[#d8ccb2] bg-white/85 px-4 py-3 outline-none transition focus:border-[#b48b3a] focus:ring-4 focus:ring-[#b48b3a]/10" placeholder="Ví dụ: Minh Sơn và người thương" />
-                </label>
-                <label className="block text-sm font-medium text-[#42553d]">
-                  Số người tham dự
-                  <select value={form.guests} onChange={(e) => setForm({ ...form, guests: e.target.value })} className="mt-2 w-full rounded-md border border-[#d8ccb2] bg-white/85 px-4 py-3 outline-none transition focus:border-[#b48b3a] focus:ring-4 focus:ring-[#b48b3a]/10">
-                    {[1, 2, 3, 4, 5].map((value) => <option key={value}>{value}</option>)}
-                  </select>
-                </label>
-                <label className="block text-sm font-medium text-[#42553d]">
-                  Lời chúc
-                  <textarea value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} className="mt-2 min-h-28 w-full rounded-md border border-[#d8ccb2] bg-white/85 px-4 py-3 outline-none transition focus:border-[#b48b3a] focus:ring-4 focus:ring-[#b48b3a]/10" placeholder="Gửi một lời chúc nhỏ tới cô dâu chú rể..." />
-                </label>
-                <Button type="submit" className="w-full py-4"><Icon name="send" className="h-4 w-4" /> Gửi xác nhận</Button>
-              </form>
-            ) : (
-              <div className="relative py-10 text-center">
-                <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full bg-[#42553d] text-white shadow-xl shadow-[#42553d]/20"><Icon name="heart" filled className="h-7 w-7" /></div>
-                <h2 className="font-serif text-3xl text-[#283b2c]">Đã ghi nhận lời chúc</h2>
-                <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[#5f684e]">Cảm ơn {form.name || "Quý khách"}. Hẹn gặp trong ngày vui của Tiến & Thuỳ.</p>
-                <Button onClick={onClose} className="mt-7 px-8">Hoàn tất</Button>
-              </div>
-            )}
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-function Header({ onRsvp }) {
+function Header() {
   return (
     <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/50 bg-[#fffaf0]/78 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:px-5 sm:py-3">
@@ -588,13 +528,13 @@ function Header({ onRsvp }) {
             <button key={id} type="button" onClick={() => smoothScroll(id)} className="text-xs font-semibold uppercase tracking-[0.16em] text-[#42553d] transition hover:text-[#b48b3a]">{label}</button>
           ))}
         </nav>
-        <Button onClick={onRsvp} variant="outline" className="px-3 py-2.5 text-[#8d6f31] shadow-lg shadow-[#81692d]/10 sm:px-4"><Icon name="gift" className="h-4 w-4" /> RSVP</Button>
+        <Button onClick={() => smoothScroll("gifts")} variant="outline" className="px-3 py-2.5 text-[#8d6f31] shadow-lg shadow-[#81692d]/10 sm:px-4"><Icon name="gift" className="h-4 w-4" /> Gửi quà</Button>
       </div>
     </header>
   );
 }
 
-function Hero({ onRsvp }) {
+function Hero() {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-[#f8f3e8] pt-16 sm:pt-20">
       <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover object-center" />
@@ -617,7 +557,7 @@ function Hero({ onRsvp }) {
           </div>
           <p className="mt-5 max-w-2xl rounded-md border border-[#d8c48b]/70 bg-white/78 px-4 py-3 text-sm leading-7 text-[#344530] shadow-xl shadow-[#42553d]/8 backdrop-blur-md sm:px-5 lg:text-base">Bữa cơm thân mật mừng lễ thành hôn được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại {EVENT.venue}, {EVENT.address}. Gia đình nhà gái tổ chức ngày <strong>10.05.2026</strong> tại Hội trường Happy Gold Palace, Trung tâm hội nghị Hoà Bình.</p>
           <div className="mt-7 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
-            <Button onClick={onRsvp} className="w-full px-8 py-4 sm:w-auto">Gửi RSVP <Icon name="heart" className="h-4 w-4" /></Button>
+            <Button onClick={() => smoothScroll("gifts")} className="w-full px-8 py-4 sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
             <Button onClick={() => smoothScroll("gallery")} variant="outline" className="w-full px-8 py-4 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
           </div>
           <div className="mx-auto mt-5 max-w-md lg:hidden">
@@ -897,7 +837,7 @@ function GallerySection() {
   );
 }
 
-function FamilyGuestbook({ onRsvp }) {
+function FamilyGuestbook() {
   const [wishes, setWishes] = useState([
     { name: "Albert Einstein", message: "If love had an equation, today would be the proof: two hearts, one universe, and an infinite supply of cake." },
     { name: "Marie Curie", message: "May your love glow brighter than radium, but with far fewer safety instructions and much better dancing." },
@@ -936,7 +876,7 @@ function FamilyGuestbook({ onRsvp }) {
               {EVENT.brideFamily.map((name) => <div key={name} className="mt-3 font-serif text-2xl text-[#283b2c]">{name}</div>)}
             </div>
           </div>
-          <Button onClick={onRsvp} className="mt-7 w-full py-4">Xác nhận tham dự</Button>
+          <Button onClick={() => smoothScroll("gifts")} className="mt-7 w-full py-4"><Icon name="gift" className="h-4 w-4" /> Gửi quà mừng cưới</Button>
         </div>
 
         <div className="rounded-lg border border-white/70 bg-white/64 p-5 shadow-2xl shadow-[#42553d]/10 backdrop-blur-xl sm:p-8">
@@ -976,12 +916,12 @@ function Footer() {
   );
 }
 
-function MobileActionBar({ onRsvp }) {
+function MobileActionBar() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/60 bg-[#fffaf0]/92 px-4 py-3 shadow-[0_-10px_30px_rgba(40,59,44,0.14)] backdrop-blur-xl md:hidden">
       <div className="mx-auto grid max-w-md grid-cols-2 gap-3">
-        <Button onClick={onRsvp} className="h-12 px-3 py-0">
-          <Icon name="heart" className="h-4 w-4" /> RSVP
+        <Button onClick={() => smoothScroll("gifts")} className="h-12 px-3 py-0">
+          <Icon name="gift" className="h-4 w-4" /> Gửi quà
         </Button>
         <Button onClick={() => smoothScroll("location")} variant="outline" className="h-12 px-3 py-0 bg-white">
           <Icon name="map-pin" className="h-4 w-4" /> Địa điểm
@@ -992,7 +932,6 @@ function MobileActionBar({ onRsvp }) {
 }
 
 function App() {
-  const [rsvpOpen, setRsvpOpen] = useState(false);
   const [introDone, setIntroDone] = useState(false);
 
   return (
@@ -1006,24 +945,23 @@ function App() {
           100% { transform: translate3d(-24px, 112vh, 0) rotate(360deg); }
         }
       `}</style>
-      <Header onRsvp={() => setRsvpOpen(true)} />
+      <Header />
       <Petals />
       <MusicControl />
       <AnimatePresence>
         {!introDone && <EnvelopeIntro onDone={() => setIntroDone(true)} />}
       </AnimatePresence>
-      <MobileActionBar onRsvp={() => setRsvpOpen(true)} />
+      <MobileActionBar />
       <main>
-        <Hero onRsvp={() => setRsvpOpen(true)} />
+        <Hero />
         <StorySection />
         <EventSection />
         <LocationSection />
         <GiftSection />
         <GallerySection />
-        <FamilyGuestbook onRsvp={() => setRsvpOpen(true)} />
+        <FamilyGuestbook />
       </main>
       <Footer />
-      <RsvpModal open={rsvpOpen} onClose={() => setRsvpOpen(false)} />
     </div>
   );
 }
