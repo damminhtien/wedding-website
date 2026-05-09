@@ -71,6 +71,7 @@ const GALLERY = Object.freeze([
   ["SMA_0324", "portrait"],
   ["SMA_0123", "portrait"],
   ["SMA_0597", "portrait"],
+  ["SMA_9230", "portrait"],
   ["SMA_0102", "portrait"],
   ["SMA_0163", "portrait"],
   ["SMA_0963", "portrait"],
@@ -138,7 +139,7 @@ function runSelfTests() {
   console.assert(pad(-2) === "00", "pad: negative number should clamp to 00");
   const past = getCountdownParts(new Date("2026-01-01T00:00:00Z"), new Date("2026-01-02T00:00:00Z"));
   console.assert(past.days === 0 && past.hours === 0 && past.minutes === 0 && past.seconds === 0, "countdown: past target should clamp to zero");
-  console.assert(GALLERY.length === 20, "gallery: 20 images should be listed");
+  console.assert(GALLERY.length === 21, "gallery: 21 images should be listed");
 }
 
 if (typeof window !== "undefined") runSelfTests();
@@ -817,9 +818,9 @@ function GallerySection() {
           </div>
         </div>
 
-        <div className="mb-8 grid gap-4 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
-          {GALLERY.slice(0, 3).map((image, index) => (
-            <button key={image.id} type="button" onClick={() => setActive(index)} className={`group relative overflow-hidden rounded-lg border border-white/70 bg-white shadow-xl ${index === 0 ? "h-[340px] sm:h-[460px]" : "h-[190px] sm:h-[220px] md:h-[460px]"}`}>
+        <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {GALLERY.slice(0, 4).map((image, index) => (
+            <button key={image.id} type="button" onClick={() => setActive(index)} className="group relative h-[220px] overflow-hidden rounded-lg border border-white/70 bg-white shadow-xl sm:h-[280px] md:h-[360px]">
               <img src={image.src} alt={image.alt} className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1b241d]/45 via-transparent to-transparent opacity-80" />
             </button>
