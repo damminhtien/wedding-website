@@ -557,16 +557,6 @@ function Hero() {
             <div className="rounded-md border border-white/80 bg-white/88 px-4 py-3 text-sm leading-6 text-[#42553d] shadow-xl shadow-[#42553d]/5 backdrop-blur-md sm:px-5"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /> {EVENT.venue}</div>
           </div>
 
-          <div className="mx-auto mt-5 hidden max-w-lg lg:mx-0 lg:block">
-            <CountdownCard />
-          </div>
-
-          <div className="mt-5 max-w-2xl rounded-md border border-[#d8c48b]/80 bg-[#f5f7ee]/95 px-4 py-4 text-left text-[15px] font-medium leading-7 text-[#2f3f2d] shadow-2xl shadow-[#42553d]/14 backdrop-blur-xl sm:px-5 lg:text-base">
-            <div className="font-serif text-2xl text-[#40553d]">Bữa cơm thân mật mừng lễ thành hôn</div>
-            <p className="mt-3">Được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại <strong>{EVENT.venue}</strong>, {EVENT.address}.</p>
-            <p className="mt-2 border-t border-[#d8c48b]/60 pt-2">Gia đình nhà gái tổ chức ngày <strong>10.05.2026</strong> tại Hội trường Happy Gold Palace, Trung tâm hội nghị Hoà Bình.</p>
-          </div>
-
           <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
             <Button onClick={() => smoothScroll("gifts")} className="h-12 w-full px-6 py-0 sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
             <Button onClick={() => smoothScroll("gallery")} variant="outline" className="h-12 w-full px-6 py-0 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
@@ -577,9 +567,14 @@ function Hero() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, delay: 0.15 }} className="relative hidden lg:block">
-          <div className="ml-auto max-w-xl">
-            <div className="overflow-hidden rounded-lg border border-white/80 bg-white/72 p-2 shadow-2xl shadow-[#1f3024]/20 backdrop-blur-xl">
-              <img src={FEATURED_IMAGES[1]} alt="Ảnh cưới Tiến và Thuỳ" className="aspect-[4/5] w-full rounded-md object-cover object-[center_30%]" />
+          <div className="ml-auto grid max-w-xl grid-cols-[0.9fr_1.1fr] gap-4">
+            <div className="space-y-4 pt-16">
+              <img src={FEATURED_IMAGES[0]} alt="Khoảnh khắc cưới 1" className="h-72 w-full rounded-lg border border-white/70 object-cover object-top shadow-2xl" />
+              <CountdownCard />
+            </div>
+            <div className="space-y-4">
+              <img src={FEATURED_IMAGES[1]} alt="Khoảnh khắc cưới 2" className="h-96 w-full rounded-lg border border-white/70 object-cover object-top shadow-2xl" />
+              <img src={FEATURED_IMAGES[2]} alt="Khoảnh khắc cưới 3" className="h-52 w-full rounded-lg border border-white/70 object-cover object-[center_25%] shadow-2xl" />
             </div>
           </div>
         </motion.div>
@@ -588,6 +583,25 @@ function Hero() {
       <button type="button" onClick={() => smoothScroll("story")} className="absolute bottom-7 left-1/2 z-30 hidden h-12 w-12 -translate-x-1/2 place-items-center rounded-full border border-white/80 bg-white/70 text-[#42553d] shadow-xl backdrop-blur md:grid" aria-label="Cuộn xuống">
         <Icon name="chevron-down" className="h-5 w-5 animate-bounce" />
       </button>
+    </section>
+  );
+}
+
+function WeddingMealSection() {
+  return (
+    <section className="relative overflow-hidden bg-[#f8f3e8] px-4 py-12 sm:px-5 sm:py-16">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#fffaf0] via-[#f8f3e8] to-[#eef4e8]" />
+      <FloralCorner className="absolute -right-24 -top-24 h-80 w-80 text-[#71856b]/50" />
+      <div className="relative mx-auto max-w-4xl rounded-lg border border-[#d8c48b]/80 bg-[#f5f7ee]/95 p-6 text-center text-[#2f3f2d] shadow-2xl shadow-[#42553d]/12 backdrop-blur-xl sm:p-8">
+        <SectionLabel>Thông tin tiệc cưới</SectionLabel>
+        <h2 className="font-serif text-4xl italic text-[#40553d] md:text-5xl">Bữa cơm thân mật mừng lễ thành hôn</h2>
+        <p className="mx-auto mt-5 max-w-3xl text-lg font-medium leading-8">
+          Được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại <strong>{EVENT.venue}</strong>, {EVENT.address}.
+        </p>
+        <p className="mx-auto mt-4 max-w-3xl border-t border-[#d8c48b]/60 pt-4 text-lg font-medium leading-8">
+          Gia đình nhà gái tổ chức ngày <strong>10.05.2026</strong> tại Hội trường Happy Gold Palace, Trung tâm hội nghị Hoà Bình.
+        </p>
+      </div>
     </section>
   );
 }
@@ -944,7 +958,7 @@ function App() {
     <div className="min-h-screen bg-[#f8f3e8] pb-20 text-[#283b2c] md:pb-0">
       <style>{`
         html { scroll-behavior: smooth; }
-        body { margin: 0; background: #f8f3e8; }
+        body { margin: 0; background: #f8f3e8; font-family: "Cormorant Garamond", Georgia, serif; }
         @keyframes petal-fall {
           0% { transform: translate3d(0, -12vh, 0) rotate(0deg); }
           50% { transform: translate3d(42px, 50vh, 0) rotate(180deg); }
@@ -960,6 +974,7 @@ function App() {
       <MobileActionBar />
       <main>
         <Hero />
+        <WeddingMealSection />
         <StorySection />
         <EventSection />
         <LocationSection />
