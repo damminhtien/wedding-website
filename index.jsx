@@ -291,6 +291,36 @@ function Petals() {
   );
 }
 
+function ThankRain({ burstKey }) {
+  const items = useMemo(() => Array.from({ length: 24 }, (_, index) => ({
+    id: index,
+    left: `${(index * 17 + 8) % 100}%`,
+    delay: `${(index % 8) * 0.12}s`,
+    duration: `${1.7 + (index % 5) * 0.18}s`,
+    size: 17 + (index % 4) * 3,
+    drift: `${index % 2 === 0 ? 34 : -28}px`,
+  })), []);
+
+  return (
+    <div key={burstKey} className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
+      {items.map((item) => (
+        <span
+          key={item.id}
+          className="absolute -top-10 font-serif font-semibold italic text-[#c99a2e] drop-shadow-[0_4px_12px_rgba(90,67,23,0.28)]"
+          style={{
+            left: item.left,
+            fontSize: item.size,
+            animation: `thank-fall ${item.duration} ease-in ${item.delay} forwards`,
+            "--thank-drift": item.drift,
+          }}
+        >
+          thank
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function FloralCorner({ className = "" }) {
   return (
     <svg viewBox="0 0 320 260" className={className} aria-hidden="true">
@@ -698,15 +728,19 @@ function LocationSection() {
 
 function GiftSection() {
   const [copiedAccount, setCopiedAccount] = useState("");
+  const [thankBurst, setThankBurst] = useState(null);
 
   const copyAccount = async (account) => {
     await copyText(account);
     setCopiedAccount(account);
+    setThankBurst(Date.now());
     window.setTimeout(() => setCopiedAccount((current) => (current === account ? "" : current)), 1800);
+    window.setTimeout(() => setThankBurst(null), 2600);
   };
 
   return (
     <section id="gifts" className="relative overflow-hidden bg-[#f8f3e8] px-4 py-16 sm:px-5 sm:py-24">
+      {thankBurst && <ThankRain burstKey={thankBurst} />}
       <div className="absolute inset-0 bg-gradient-to-br from-[#fffaf0] via-[#f8f3e8] to-[#edf3e7]" />
       <FloralCorner className="absolute -left-24 top-4 h-80 w-80 rotate-180 text-[#71856b]/70" />
       <FloralCorner className="absolute -bottom-28 -right-16 h-96 w-96 text-[#b48b3a]/45" />
@@ -938,6 +972,11 @@ function App() {
           0% { transform: translate3d(0, -12vh, 0) rotate(0deg); }
           50% { transform: translate3d(42px, 50vh, 0) rotate(180deg); }
           100% { transform: translate3d(-24px, 112vh, 0) rotate(360deg); }
+        }
+        @keyframes thank-fall {
+          0% { opacity: 0; transform: translate3d(0, -12vh, 0) rotate(-8deg); }
+          12% { opacity: 1; }
+          100% { opacity: 0; transform: translate3d(var(--thank-drift), 112vh, 0) rotate(16deg); }
         }
       `}</style>
       <Header />
