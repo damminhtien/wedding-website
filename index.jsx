@@ -70,7 +70,6 @@ const SCHEDULE = Object.freeze([
 ]);
 
 const GALLERY = Object.freeze([
-  ["SMA_0059", "portrait"],
   ["SMA_0102", "portrait"],
   ["SMA_0123", "portrait"],
   ["SMA_0163", "portrait"],
@@ -78,14 +77,10 @@ const GALLERY = Object.freeze([
   ["SMA_0597", "portrait"],
   ["SMA_0963", "portrait"],
   ["SMA_1088", "portrait"],
-  ["SMA_1106", "portrait"],
   ["SMA_1239", "portrait"],
-  ["SMA_1244", "landscape"],
   ["SMA_1251", "portrait"],
   ["SMA_1436", "portrait"],
-  ["SMA_1461", "portrait"],
   ["SMA_1715", "portrait"],
-  ["SMA_1723", "portrait"],
   ["SMA_1755", "portrait"],
   ["SMA_1829", "portrait"],
   ["SMA_1908", "portrait"],
@@ -95,21 +90,6 @@ const GALLERY = Object.freeze([
   ["SMA_2330", "portrait"],
   ["SMA_2370", "portrait"],
   ["SMA_2375", "portrait"],
-  ["SMA_2412", "portrait"],
-  ["SMA_2426", "portrait"],
-  ["SMA_9210", "portrait"],
-  ["SMA_9223", "portrait"],
-  ["SMA_9230", "portrait"],
-  ["SMA_9466", "portrait"],
-  ["SMA_9564", "portrait"],
-  ["SMA_9660", "portrait"],
-  ["SMA_9710", "portrait"],
-  ["SMA_9851", "portrait"],
-  ["SMA_9936", "portrait"],
-  ["SMA_9945", "portrait"],
-  ["SMA_9963", "portrait"],
-  ["SMA_9985", "portrait"],
-  ["SMA_9998", "portrait"],
 ].map(([file, orientation], index) => ({
   id: file,
   src: `/assets/images-optimized/thumbs/${file}.webp`,
@@ -160,7 +140,7 @@ function runSelfTests() {
   console.assert(pad(-2) === "00", "pad: negative number should clamp to 00");
   const past = getCountdownParts(new Date("2026-01-01T00:00:00Z"), new Date("2026-01-02T00:00:00Z"));
   console.assert(past.days === 0 && past.hours === 0 && past.minutes === 0 && past.seconds === 0, "countdown: past target should clamp to zero");
-  console.assert(GALLERY.length === 40, "gallery: all 40 images should be listed");
+  console.assert(GALLERY.length === 20, "gallery: 20 images should be listed");
 }
 
 if (typeof window !== "undefined") runSelfTests();
