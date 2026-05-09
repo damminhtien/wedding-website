@@ -555,7 +555,7 @@ function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-6 px-4 py-6 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/75 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8d6f31] shadow-sm backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.16em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
-          <h1 className="diamond-corner inline-block whitespace-nowrap rounded-md bg-[#fffaf0]/58 px-3 py-1 text-[clamp(1.8rem,6.8vw,3.9rem)] font-medium italic tracking-[0.005em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.015em] lg:tracking-[0.025em]" style={{ fontFamily: '"Fraunces", "Cormorant Garamond", Georgia, serif', fontVariationSettings: '"SOFT" 75, "WONK" 1', WebkitTextStroke: "0.18px rgba(255, 250, 240, 0.86)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.3)" }}>Lễ Thành Hôn</h1>
+          <h1 className="diamond-backing inline-block whitespace-nowrap rounded-md bg-[#fffaf0]/58 px-3 py-1 text-[clamp(1.8rem,6.8vw,3.9rem)] font-medium italic tracking-[0.005em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.015em] lg:tracking-[0.025em]" style={{ fontFamily: '"Fraunces", "Cormorant Garamond", Georgia, serif', fontVariationSettings: '"SOFT" 75, "WONK" 1', WebkitTextStroke: "0.18px rgba(255, 250, 240, 0.86)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.3)" }}>Lễ Thành Hôn</h1>
           <div className="mt-4 font-serif text-[clamp(2.45rem,10vw,4.7rem)] italic leading-[1.06] text-[#b48b3a] sm:mt-5">
             <div>{EVENT.groom}</div>
             <div className="text-3xl leading-none text-[#6b7758] sm:text-4xl">&</div>
@@ -1036,26 +1036,45 @@ function App() {
           88% { opacity: 1; }
           100% { opacity: 0; transform: translate3d(var(--thank-drift), 112vh, 0) rotate(16deg); }
         }
-        .diamond-corner {
+        .diamond-backing {
           position: relative;
+          isolation: isolate;
+          overflow: hidden;
         }
-        .diamond-corner::after {
+        .diamond-backing::before,
+        .diamond-backing::after {
           content: "";
           position: absolute;
-          right: 0.08em;
-          top: 0.05em;
-          width: 0.22em;
-          height: 0.22em;
+          inset: 0;
           pointer-events: none;
-          background: linear-gradient(135deg, #ffffff 0 18%, #fff1a8 19% 38%, #d4a43a 39% 58%, #ffffff 59% 100%);
-          clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-          filter: drop-shadow(0 0 8px rgba(255, 241, 168, 0.85)) drop-shadow(0 0 16px rgba(180, 139, 58, 0.55));
-          animation: corner-diamond-sparkle 2.8s ease-in-out infinite;
+          border-radius: inherit;
+          z-index: -1;
         }
-        @keyframes corner-diamond-sparkle {
-          0%, 100% { opacity: 0.45; transform: scale(0.82) rotate(0deg); }
-          45% { opacity: 1; transform: scale(1.18) rotate(18deg); }
-          62% { opacity: 0.7; transform: scale(0.95) rotate(45deg); }
+        .diamond-backing::before {
+          background:
+            radial-gradient(circle at 12% 28%, rgba(255, 255, 255, 0.98) 0 1.5px, transparent 2.5px),
+            radial-gradient(circle at 26% 72%, rgba(255, 241, 168, 0.95) 0 1.5px, transparent 3px),
+            radial-gradient(circle at 58% 18%, rgba(255, 255, 255, 0.92) 0 1.5px, transparent 2.6px),
+            radial-gradient(circle at 82% 38%, rgba(255, 232, 133, 0.95) 0 2px, transparent 3.5px),
+            radial-gradient(circle at 92% 78%, rgba(255, 255, 255, 0.86) 0 1.4px, transparent 2.8px);
+          filter: drop-shadow(0 0 5px rgba(255, 241, 168, 0.9));
+          animation: diamond-field-twinkle 2.6s ease-in-out infinite;
+        }
+        .diamond-backing::after {
+          background: linear-gradient(112deg, transparent 0 24%, rgba(255, 255, 255, 0.08) 34%, rgba(255, 244, 184, 0.9) 48%, rgba(255, 255, 255, 0.18) 58%, transparent 72% 100%);
+          transform: translateX(-120%);
+          animation: diamond-backing-sweep 3.8s ease-in-out infinite;
+          mix-blend-mode: screen;
+        }
+        @keyframes diamond-field-twinkle {
+          0%, 100% { opacity: 0.45; transform: scale(0.98); }
+          45% { opacity: 1; transform: scale(1.02); }
+          68% { opacity: 0.62; transform: scale(1); }
+        }
+        @keyframes diamond-backing-sweep {
+          0%, 28% { transform: translateX(-120%); opacity: 0; }
+          46% { opacity: 1; }
+          70%, 100% { transform: translateX(120%); opacity: 0; }
         }
         .story-effect {
           position: absolute;
