@@ -70,11 +70,11 @@ const SCHEDULE = Object.freeze([
 ]);
 
 const GALLERY = Object.freeze([
-  ["SMA_0102", "portrait"],
-  ["SMA_0123", "portrait"],
-  ["SMA_0163", "portrait"],
   ["SMA_0324", "portrait"],
+  ["SMA_0123", "portrait"],
   ["SMA_0597", "portrait"],
+  ["SMA_0102", "portrait"],
+  ["SMA_0163", "portrait"],
   ["SMA_0963", "portrait"],
   ["SMA_1088", "portrait"],
   ["SMA_1239", "portrait"],
@@ -785,7 +785,6 @@ function GallerySection() {
             <SectionLabel>Memories</SectionLabel>
             <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Album ảnh</h2>
           </div>
-          <div className="text-sm leading-6 text-[#5f684e] md:max-w-md">{GALLERY.length} khoảnh khắc được hiển thị bằng ảnh WebP tối ưu cho tốc độ tải trang.</div>
         </div>
 
         <div className="mb-8 grid gap-4 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
