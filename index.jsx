@@ -460,8 +460,8 @@ function EnvelopeIntro({ onDone }) {
             <motion.div
               className="absolute left-1/2 top-8 z-10 h-[220px] w-[78%] -translate-x-1/2 overflow-hidden rounded-md border border-[#e8d7ad] bg-[#fffaf0] p-6 text-center shadow-2xl shadow-[#6b5b2e]/18"
               variants={{
-                closed: { y: 72, scale: 0.96, rotate: 0 },
-                open: { y: -50, scale: 1, rotate: -1.2 },
+                closed: { y: 72, scale: 0.96, rotate: 0, zIndex: 10 },
+                open: { y: -50, scale: 1, rotate: -1.2, zIndex: 40 },
               }}
               transition={{ type: "spring", stiffness: 68, damping: 18, mass: 0.95, delay: opened ? 0.18 : 0 }}
             >
@@ -470,7 +470,7 @@ function EnvelopeIntro({ onDone }) {
               </div>
               <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b48b3a]">Thiệp mời</div>
               <div className="mt-3 font-serif text-4xl italic text-[#40553d]">Tiến & Thuỳ</div>
-              <div className="mt-3 text-sm font-semibold text-[#7d704a]">10.05 & 11.05.2026</div>
+              <div className="mt-3 font-serif text-xl italic text-[#7d704a]">10.05 & 11.05.2026</div>
               <div className="mx-auto mt-5 h-px w-24 bg-[#dfc37d]" />
             </motion.div>
 
@@ -482,8 +482,8 @@ function EnvelopeIntro({ onDone }) {
               <motion.div
                 className="absolute left-0 right-0 top-0 z-20 h-[132px] origin-top rounded-t-lg bg-[#f0dfb8] [clip-path:polygon(0_0,100%_0,50%_100%)]"
                 variants={{
-                  closed: { rotateX: 0, y: 0 },
-                  open: { rotateX: -162, y: -8 },
+                  closed: { rotateX: 0, y: 0, zIndex: 30 },
+                  open: { rotateX: -168, y: -14, zIndex: 5 },
                 }}
                 transition={{ duration: 1.22, ease: [0.16, 1, 0.3, 1] }}
                 style={{ transformPerspective: 900 }}
