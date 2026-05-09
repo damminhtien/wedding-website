@@ -53,6 +53,8 @@ const STORY = Object.freeze([
   ["11.05.2026", "One Home", "When every star and season had gathered in their proper place, we came home to one another, ready to build the morrow hand in hand.", "home"],
 ]);
 
+const STORY_EFFECTS = Object.freeze(["books", "rain", "stars", "bouquet"]);
+
 const STORY_QUOTE = "At last, we have reached the fair harbor of lovers' love; now this love shall grow wider still, and make room for all the life before us.";
 
 const GIFT_ACCOUNTS = Object.freeze([
@@ -613,6 +615,33 @@ function WeddingMealSection() {
   );
 }
 
+function StoryBackdrop({ effect }) {
+  const count = effect === "rain" ? 16 : effect === "stars" ? 18 : 12;
+  const items = useMemo(() => Array.from({ length: count }, (_, index) => ({
+    id: index,
+    left: `${(index * 23 + 9) % 96}%`,
+    top: `${(index * 31 + 11) % 88}%`,
+    delay: `${(index % 7) * 0.38}s`,
+    duration: `${4.8 + (index % 5) * 0.55}s`,
+  })), [count]);
+
+  return (
+    <div className={`story-effect story-effect-${effect}`} aria-hidden="true">
+      {items.map((item) => (
+        <span
+          key={item.id}
+          style={{
+            left: item.left,
+            top: item.top,
+            animationDelay: item.delay,
+            animationDuration: item.duration,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function StorySection() {
   const [selected, setSelected] = useState(0);
 
@@ -626,11 +655,14 @@ function StorySection() {
         </div>
         <div className="grid gap-5 md:grid-cols-4">
           {STORY.map(([date, title, text, icon], index) => (
-            <motion.button key={date} type="button" onClick={() => setSelected(index)} whileHover={{ y: -6 }} className={`relative rounded-lg border p-5 text-left shadow-xl transition ${selected === index ? "border-[#c4a052] bg-white/88" : "border-white/70 bg-white/55 hover:bg-white/80"} backdrop-blur-xl`}>
-              <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-[#42553d] text-white shadow-lg"><Icon name={icon} className="h-6 w-6" /></div>
-              <div className="font-serif text-2xl text-[#42553d]">{date}</div>
-              <div className="mt-2 text-sm font-bold uppercase tracking-[0.14em] text-[#8d6f31]">{title}</div>
-              <p className="mt-4 text-sm leading-6 text-[#5f684e]">{text}</p>
+            <motion.button key={date} type="button" onClick={() => setSelected(index)} whileHover={{ y: -6 }} className={`relative overflow-hidden rounded-lg border p-5 text-left shadow-xl transition ${selected === index ? "border-[#c4a052] bg-white/88" : "border-white/70 bg-white/55 hover:bg-white/80"} backdrop-blur-xl`}>
+              <StoryBackdrop effect={STORY_EFFECTS[index]} />
+              <div className="relative z-10">
+                <div className="mb-5 grid h-14 w-14 place-items-center rounded-full bg-[#42553d] text-white shadow-lg"><Icon name={icon} className="h-6 w-6" /></div>
+                <div className="font-serif text-2xl text-[#42553d]">{date}</div>
+                <div className="mt-2 text-sm font-bold uppercase tracking-[0.14em] text-[#8d6f31]">{title}</div>
+                <p className="mt-4 text-sm leading-6 text-[#5f684e]">{text}</p>
+              </div>
             </motion.button>
           ))}
         </div>
@@ -1008,6 +1040,79 @@ function App() {
           0%, 35%, 100% { opacity: 0; transform: scale(0.96); }
           45% { opacity: 0.95; transform: scale(1); }
           55% { opacity: 0.25; transform: scale(1.02); }
+        }
+        .story-effect {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+          border-radius: inherit;
+          pointer-events: none;
+        }
+        .story-effect::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(255, 250, 240, 0.52), rgba(255, 255, 255, 0.78));
+          z-index: 1;
+        }
+        .story-effect span {
+          position: absolute;
+          z-index: 0;
+          opacity: 0.52;
+        }
+        .story-effect-books span {
+          width: 18px;
+          height: 24px;
+          border-radius: 2px 5px 5px 2px;
+          background: linear-gradient(90deg, #8d6f31 0 22%, #fff1c7 23% 30%, #d8c48b 31% 100%);
+          box-shadow: 0 4px 10px rgba(66, 85, 61, 0.14);
+          animation: story-book-fall linear infinite;
+        }
+        .story-effect-rain span {
+          width: 1px;
+          height: 38px;
+          border-radius: 999px;
+          background: linear-gradient(180deg, transparent, rgba(82, 105, 121, 0.58));
+          animation: story-rain-fall linear infinite;
+        }
+        .story-effect-stars {
+          background: linear-gradient(135deg, rgba(28, 44, 38, 0.82), rgba(66, 85, 61, 0.32));
+        }
+        .story-effect-stars span {
+          width: 4px;
+          height: 4px;
+          border-radius: 999px;
+          background: #fff8cf;
+          box-shadow: 0 0 12px rgba(255, 248, 207, 0.92), 0 0 24px rgba(246, 217, 132, 0.5);
+          animation: story-star-twinkle ease-in-out infinite;
+        }
+        .story-effect-bouquet span {
+          width: 13px;
+          height: 18px;
+          border-radius: 80% 20% 80% 20%;
+          background: linear-gradient(135deg, rgba(255, 238, 226, 0.95), rgba(196, 160, 82, 0.76));
+          box-shadow: 0 4px 12px rgba(180, 139, 58, 0.18);
+          animation: story-petal-toss ease-in-out infinite;
+        }
+        @keyframes story-book-fall {
+          0% { transform: translate3d(-8px, -80px, 0) rotate(-22deg); opacity: 0; }
+          18% { opacity: 0.55; }
+          100% { transform: translate3d(22px, 260px, 0) rotate(34deg); opacity: 0; }
+        }
+        @keyframes story-rain-fall {
+          0% { transform: translate3d(18px, -80px, 0) rotate(14deg); opacity: 0; }
+          12% { opacity: 0.62; }
+          100% { transform: translate3d(-24px, 250px, 0) rotate(14deg); opacity: 0; }
+        }
+        @keyframes story-star-twinkle {
+          0%, 100% { transform: scale(0.7); opacity: 0.25; }
+          45% { transform: scale(1.5); opacity: 0.95; }
+        }
+        @keyframes story-petal-toss {
+          0% { transform: translate3d(-90px, 80px, 0) rotate(-34deg); opacity: 0; }
+          20% { opacity: 0.68; }
+          100% { transform: translate3d(160px, -90px, 0) rotate(110deg); opacity: 0; }
         }
       `}</style>
       <Header />
