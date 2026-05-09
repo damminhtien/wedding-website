@@ -621,7 +621,6 @@ function EventSection() {
         <div>
           <SectionLabel>Wedding day</SectionLabel>
           <h2 className="font-serif text-4xl text-[#283b2c] md:text-5xl">Lịch trình ngày cưới</h2>
-          <p className="mt-5 max-w-xl text-sm leading-7 text-[#5f684e]">Hai gia đình tổ chức cùng khung giờ. Lễ thành hôn bắt đầu lúc <strong>{EVENT.ceremonyTime}</strong>, bữa cơm thân mật lúc <strong>{EVENT.partyTime}</strong>.</p>
           <div className="mt-8 space-y-4">
             {WEDDING_EVENTS.map((event) => (
               <div key={event.side} className="rounded-lg border border-white/70 bg-white/60 p-5 shadow-xl backdrop-blur-xl sm:p-6">
