@@ -552,11 +552,11 @@ function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/75 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8d6f31] shadow-sm backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.16em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
-          <h1 className="inline-block whitespace-nowrap rounded-md bg-[#fffaf0]/58 px-3 py-1 text-[clamp(1.8rem,6.8vw,3.9rem)] font-medium italic tracking-[0.005em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.015em] lg:tracking-[0.025em]" style={{ fontFamily: '"Fraunces", "Cormorant Garamond", Georgia, serif', fontVariationSettings: '"SOFT" 75, "WONK" 1', WebkitTextStroke: "0.18px rgba(255, 250, 240, 0.86)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.3)" }}>Lễ Thành Hôn</h1>
+          <h1 className="diamond-text inline-block whitespace-nowrap rounded-md bg-[#fffaf0]/58 px-3 py-1 text-[clamp(1.8rem,6.8vw,3.9rem)] font-medium italic tracking-[0.005em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.015em] lg:tracking-[0.025em]" style={{ "--shine-base": "#142217", "--shine-glow": "#f6d984", fontFamily: '"Fraunces", "Cormorant Garamond", Georgia, serif', fontVariationSettings: '"SOFT" 75, "WONK" 1', WebkitTextStroke: "0.18px rgba(255, 250, 240, 0.86)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.3)" }}>Lễ Thành Hôn</h1>
           <div className="mt-4 font-serif text-[clamp(2.45rem,10vw,4.7rem)] italic leading-[1.06] text-[#b48b3a] sm:mt-5">
-            <div>{EVENT.groom}</div>
+            <div className="diamond-text inline-block" style={{ "--shine-base": "#b48b3a", "--shine-glow": "#fff1a8" }}>{EVENT.groom}</div>
             <div className="text-3xl leading-none text-[#6b7758] sm:text-4xl">&</div>
-            <div>{EVENT.bride}</div>
+            <div className="diamond-text inline-block" style={{ "--shine-base": "#b48b3a", "--shine-glow": "#fff1a8" }}>{EVENT.bride}</div>
           </div>
 
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
@@ -976,6 +976,38 @@ function App() {
           0% { opacity: 1; transform: translate3d(0, 2vh, 0) rotate(-8deg); }
           88% { opacity: 1; }
           100% { opacity: 0; transform: translate3d(var(--thank-drift), 112vh, 0) rotate(16deg); }
+        }
+        .diamond-text {
+          position: relative;
+          color: transparent;
+          background-image:
+            linear-gradient(110deg, var(--shine-base) 0%, var(--shine-base) 34%, #fff8cf 45%, var(--shine-glow) 50%, #ffffff 54%, var(--shine-base) 66%, var(--shine-base) 100%);
+          background-size: 260% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          animation: diamond-shimmer 4.8s ease-in-out infinite;
+        }
+        .diamond-text::after {
+          content: "";
+          position: absolute;
+          inset: -0.08em -0.12em;
+          pointer-events: none;
+          background:
+            radial-gradient(circle at 16% 28%, rgba(255, 255, 255, 0.95) 0 1px, transparent 2px),
+            radial-gradient(circle at 54% 6%, rgba(255, 240, 168, 0.9) 0 1px, transparent 2px),
+            radial-gradient(circle at 84% 58%, rgba(255, 255, 255, 0.9) 0 1px, transparent 2px);
+          opacity: 0;
+          filter: drop-shadow(0 0 6px rgba(246, 217, 132, 0.55));
+          animation: diamond-sparkle 3.2s ease-in-out infinite;
+        }
+        @keyframes diamond-shimmer {
+          0%, 38% { background-position: 130% 50%; }
+          62%, 100% { background-position: -130% 50%; }
+        }
+        @keyframes diamond-sparkle {
+          0%, 35%, 100% { opacity: 0; transform: scale(0.96); }
+          45% { opacity: 0.95; transform: scale(1); }
+          55% { opacity: 0.25; transform: scale(1.02); }
         }
       `}</style>
       <Header />
