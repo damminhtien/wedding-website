@@ -552,27 +552,31 @@ function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#f8f3e8] to-transparent" />
       <FloralCorner className="absolute -left-24 top-16 h-80 w-80 rotate-180 text-[#71856b]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-6 px-4 py-6 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
-        <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/75 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8d6f31] shadow-sm backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.16em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
-          <h1 className="diamond-backing inline-block whitespace-nowrap rounded-md bg-[#fffaf0]/58 px-3 py-1 text-[clamp(1.8rem,6.8vw,3.9rem)] font-medium italic tracking-[0.005em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.015em] lg:tracking-[0.025em]" style={{ fontFamily: '"Fraunces", "Cormorant Garamond", Georgia, serif', fontVariationSettings: '"SOFT" 75, "WONK" 1', WebkitTextStroke: "0.18px rgba(255, 250, 240, 0.86)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.3)" }}>Lễ Thành Hôn</h1>
-          <div className="mt-4 font-serif text-[clamp(2.45rem,10vw,4.7rem)] italic leading-[1.06] text-[#b48b3a] sm:mt-5">
-            <div>{EVENT.groom}</div>
-            <div className="text-3xl leading-none text-[#6b7758] sm:text-4xl">&</div>
-            <div>{EVENT.bride}</div>
+      <div className="relative mx-auto grid max-w-7xl items-end gap-6 px-4 pb-8 pt-6 sm:items-center sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
+        <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="flex min-h-[calc(100svh-8.5rem)] max-w-3xl flex-col justify-between text-center sm:block sm:min-h-0 lg:text-left">
+          <div>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/75 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8d6f31] shadow-sm backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.16em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
+            <h1 className="diamond-backing inline-block whitespace-nowrap rounded-md bg-[#fffaf0]/58 px-3 py-1 text-[clamp(1.8rem,6.8vw,3.9rem)] font-medium italic tracking-[0.005em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.015em] lg:tracking-[0.025em]" style={{ fontFamily: '"Fraunces", "Cormorant Garamond", Georgia, serif', fontVariationSettings: '"SOFT" 75, "WONK" 1', WebkitTextStroke: "0.18px rgba(255, 250, 240, 0.86)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.3)" }}>Lễ Thành Hôn</h1>
+            <div className="mt-4 font-serif text-[clamp(2.45rem,10vw,4.7rem)] italic leading-[1.06] text-[#b48b3a] sm:mt-5">
+              <div>{EVENT.groom}</div>
+              <div className="text-3xl leading-none text-[#6b7758] sm:text-4xl">&</div>
+              <div>{EVENT.bride}</div>
+            </div>
           </div>
 
-          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
-            <div className="rounded-md border border-[#f1d992] bg-[#fffaf0] px-4 py-3 text-sm font-semibold text-[#162318] shadow-2xl shadow-[#142217]/18 backdrop-blur-xl sm:px-5 sm:text-base"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#9d7730]" />{EVENT.dateText}</div>
-            <div className="rounded-md border border-[#f1d992] bg-[#fffaf0] px-4 py-3 text-sm font-semibold leading-6 text-[#162318] shadow-2xl shadow-[#142217]/18 backdrop-blur-xl sm:px-5 sm:text-base"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#9d7730]" />{EVENT.venue}</div>
-          </div>
+          <div className="mt-8 sm:mt-6">
+            <div className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
+              <div className="rounded-md border border-[#f1d992] bg-[#fffaf0] px-4 py-3 text-sm font-semibold text-[#162318] shadow-2xl shadow-[#142217]/18 backdrop-blur-xl sm:px-5 sm:text-base"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#9d7730]" />{EVENT.dateText}</div>
+              <div className="rounded-md border border-[#f1d992] bg-[#fffaf0] px-4 py-3 text-sm font-semibold leading-6 text-[#162318] shadow-2xl shadow-[#142217]/18 backdrop-blur-xl sm:px-5 sm:text-base"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#9d7730]" />{EVENT.venue}</div>
+            </div>
 
-          <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
-            <Button onClick={() => smoothScroll("gifts")} className="hidden h-12 w-full px-6 py-0 sm:inline-flex sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
-            <Button onClick={() => smoothScroll("gallery")} variant="outline" className="h-12 w-full px-6 py-0 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
-          </div>
-          <div className="mx-auto mt-5 hidden max-w-md sm:block lg:hidden">
-            <CountdownCard />
+            <div className="mt-4 grid gap-3 sm:mt-6 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
+              <Button onClick={() => smoothScroll("gifts")} className="hidden h-12 w-full px-6 py-0 sm:inline-flex sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
+              <Button onClick={() => smoothScroll("gallery")} variant="outline" className="h-12 w-full px-6 py-0 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
+            </div>
+            <div className="mx-auto mt-5 hidden max-w-md sm:block lg:hidden">
+              <CountdownCard />
+            </div>
           </div>
         </motion.div>
 
