@@ -536,29 +536,44 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-[#f8f3e8] pt-16 sm:pt-20">
-      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover object-center" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fffaf0]/96 via-[#fffaf0]/80 to-[#283b2c]/28 lg:bg-gradient-to-r" />
+    <section id="home" className="relative overflow-hidden bg-[#f8f3e8] pt-16 sm:pt-20 lg:min-h-screen">
+      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 hidden h-full w-full object-cover object-center lg:block" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffaf0] via-[#f8f3e8] to-[#eef4e8] lg:bg-gradient-to-r lg:from-[#fffaf0]/96 lg:via-[#fffaf0]/86 lg:to-[#283b2c]/26" />
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#f8f3e8] to-transparent" />
       <FloralCorner className="absolute -left-24 top-16 h-80 w-80 rotate-180 text-[#71856b]" />
 
-      <div className="relative mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.96fr_1.04fr]">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/65 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8d6f31] backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.22em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
-          <h1 className="font-serif text-4xl font-semibold uppercase tracking-[0.08em] text-[#1f3024] sm:text-5xl md:text-7xl md:tracking-[0.12em]" style={{ WebkitTextStroke: "0.7px rgba(255, 250, 240, 0.88)", textShadow: "0 2px 18px rgba(255, 250, 240, 0.94), 0 2px 4px rgba(40, 59, 44, 0.28)" }}>Lễ Thành Hôn</h1>
-          <div className="mt-4 font-serif text-4xl italic leading-tight text-[#b48b3a] sm:mt-5 sm:text-5xl md:text-7xl">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/75 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8d6f31] shadow-sm backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.16em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
+          <h1 className="whitespace-nowrap font-serif text-[clamp(2.05rem,8.6vw,4.7rem)] font-semibold uppercase tracking-[0.035em] text-[#1f3024] sm:tracking-[0.07em] lg:tracking-[0.09em]" style={{ WebkitTextStroke: "0.7px rgba(255, 250, 240, 0.88)", textShadow: "0 2px 18px rgba(255, 250, 240, 0.94), 0 2px 4px rgba(40, 59, 44, 0.28)" }}>Lễ Thành Hôn</h1>
+          <div className="mt-4 font-serif text-[clamp(2.45rem,10vw,4.7rem)] italic leading-[1.06] text-[#b48b3a] sm:mt-5">
             <div>{EVENT.groom}</div>
-            <div className="text-3xl text-[#6b7758]">&</div>
+            <div className="text-3xl leading-none text-[#6b7758] sm:text-4xl">&</div>
             <div>{EVENT.bride}</div>
           </div>
+
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.12 }} className="mx-auto mt-6 overflow-hidden rounded-lg border border-white/80 bg-white/85 shadow-2xl shadow-[#42553d]/12 lg:hidden">
+            <img src={FEATURED_IMAGES[1]} alt="Ảnh cưới Tiến và Thuỳ" className="aspect-[4/5] w-full object-cover object-[center_30%]" />
+          </motion.div>
+
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
-            <div className="rounded-md border border-white/70 bg-white/70 px-4 py-3 shadow-xl shadow-[#42553d]/5 backdrop-blur sm:px-5"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /><span className="font-serif text-xl text-[#42553d] sm:text-2xl">{EVENT.dateText}</span></div>
-            <div className="rounded-md border border-white/70 bg-white/70 px-4 py-3 text-sm leading-6 text-[#42553d] shadow-xl shadow-[#42553d]/5 backdrop-blur sm:px-5"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /> {EVENT.venue}</div>
+            <div className="rounded-md border border-white/80 bg-white/88 px-4 py-3 shadow-xl shadow-[#42553d]/5 backdrop-blur-md sm:px-5"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /><span className="font-serif text-xl text-[#42553d] sm:text-2xl">{EVENT.dateText}</span></div>
+            <div className="rounded-md border border-white/80 bg-white/88 px-4 py-3 text-sm leading-6 text-[#42553d] shadow-xl shadow-[#42553d]/5 backdrop-blur-md sm:px-5"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /> {EVENT.venue}</div>
           </div>
-          <p className="mt-5 max-w-2xl rounded-md border border-[#d8c48b]/70 bg-white/78 px-4 py-3 text-sm leading-7 text-[#344530] shadow-xl shadow-[#42553d]/8 backdrop-blur-md sm:px-5 lg:text-base">Bữa cơm thân mật mừng lễ thành hôn được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại {EVENT.venue}, {EVENT.address}. Gia đình nhà gái tổ chức ngày <strong>10.05.2026</strong> tại Hội trường Happy Gold Palace, Trung tâm hội nghị Hoà Bình.</p>
-          <div className="mt-7 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
-            <Button onClick={() => smoothScroll("gifts")} className="w-full px-8 py-4 sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
-            <Button onClick={() => smoothScroll("gallery")} variant="outline" className="w-full px-8 py-4 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
+
+          <div className="mx-auto mt-5 hidden max-w-lg lg:mx-0 lg:block">
+            <CountdownCard />
+          </div>
+
+          <div className="mt-5 max-w-2xl rounded-md border border-[#d8c48b]/80 bg-[#f5f7ee]/95 px-4 py-4 text-left text-[15px] font-medium leading-7 text-[#2f3f2d] shadow-2xl shadow-[#42553d]/14 backdrop-blur-xl sm:px-5 lg:text-base">
+            <div className="font-serif text-2xl text-[#40553d]">Bữa cơm thân mật mừng lễ thành hôn</div>
+            <p className="mt-3">Được tổ chức lúc <strong>{EVENT.partyTime}</strong>, ngày <strong>{EVENT.dateText}</strong> tại <strong>{EVENT.venue}</strong>, {EVENT.address}.</p>
+            <p className="mt-2 border-t border-[#d8c48b]/60 pt-2">Gia đình nhà gái tổ chức ngày <strong>10.05.2026</strong> tại Hội trường Happy Gold Palace, Trung tâm hội nghị Hoà Bình.</p>
+          </div>
+
+          <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
+            <Button onClick={() => smoothScroll("gifts")} className="h-12 w-full px-6 py-0 sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
+            <Button onClick={() => smoothScroll("gallery")} variant="outline" className="h-12 w-full px-6 py-0 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
           </div>
           <div className="mx-auto mt-5 max-w-md lg:hidden">
             <CountdownCard />
@@ -566,14 +581,9 @@ function Hero() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.1, delay: 0.15 }} className="relative hidden lg:block">
-          <div className="ml-auto grid max-w-xl grid-cols-[0.9fr_1.1fr] gap-4">
-            <div className="space-y-4 pt-16">
-              <img src={FEATURED_IMAGES[0]} alt="Khoảnh khắc cưới 1" className="h-72 w-full rounded-lg border border-white/70 object-cover object-top shadow-2xl" />
-              <CountdownCard />
-            </div>
-            <div className="space-y-4">
-              <img src={FEATURED_IMAGES[1]} alt="Khoảnh khắc cưới 2" className="h-96 w-full rounded-lg border border-white/70 object-cover object-top shadow-2xl" />
-              <img src={FEATURED_IMAGES[2]} alt="Khoảnh khắc cưới 3" className="h-52 w-full rounded-lg border border-white/70 object-cover object-top shadow-2xl" />
+          <div className="ml-auto max-w-xl">
+            <div className="overflow-hidden rounded-lg border border-white/80 bg-white/72 p-2 shadow-2xl shadow-[#1f3024]/20 backdrop-blur-xl">
+              <img src={FEATURED_IMAGES[1]} alt="Ảnh cưới Tiến và Thuỳ" className="aspect-[4/5] w-full rounded-md object-cover object-[center_30%]" />
             </div>
           </div>
         </motion.div>
