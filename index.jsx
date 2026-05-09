@@ -893,6 +893,14 @@ function GiftSection() {
 
 function GallerySection() {
   const [active, setActive] = useState(null);
+  const lightboxSparkles = useMemo(() => Array.from({ length: 24 }, (_, index) => ({
+    id: index,
+    left: `${8 + ((index * 19) % 84)}%`,
+    top: `${7 + ((index * 31) % 82)}%`,
+    delay: `${(index % 8) * 0.18}s`,
+    duration: `${2.2 + (index % 5) * 0.32}s`,
+    scale: 0.62 + (index % 4) * 0.16,
+  })), [active]);
 
   const showPrevious = () => {
     setActive((current) => (current === null ? 0 : (current - 1 + GALLERY.length) % GALLERY.length));
@@ -925,7 +933,15 @@ function GallerySection() {
 
         <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
           {GALLERY.slice(0, 4).map((image, index) => (
-            <button key={image.id} type="button" onClick={() => setActive(index)} className="group relative h-[220px] overflow-hidden rounded-lg border border-white/70 bg-white shadow-xl sm:h-[280px] md:h-[360px]">
+            <button
+              key={image.id}
+              type="button"
+              onClick={(event) => {
+                spawnHeart(event.clientX, event.clientY, 5);
+                setActive(index);
+              }}
+              className="group relative h-[220px] overflow-hidden rounded-lg border border-white/70 bg-white shadow-xl sm:h-[280px] md:h-[360px]"
+            >
               <img src={image.src} alt={image.alt} className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1b241d]/45 via-transparent to-transparent opacity-80" />
             </button>
@@ -937,7 +953,10 @@ function GallerySection() {
             <motion.button
               key={image.id}
               type="button"
-              onClick={() => setActive(index)}
+              onClick={(event) => {
+                spawnHeart(event.clientX, event.clientY, 5);
+                setActive(index);
+              }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.12 }}
@@ -954,15 +973,66 @@ function GallerySection() {
 
       <AnimatePresence>
         {active !== null && (
-          <motion.div className="fixed inset-0 z-50 grid place-items-center bg-[#121711]/88 p-4 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <button type="button" onClick={() => setActive(null)} className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-white text-[#283b2c] shadow-xl" aria-label="Đóng ảnh">
+          <motion.div className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-[#121711]/88 p-4 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div key={`effects-${GALLERY[active].id}`} className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="lightbox-aura absolute left-1/2 top-1/2 h-[min(76vh,78vw)] w-[min(76vh,78vw)] rounded-full" />
+              <div className="lightbox-orbit absolute left-1/2 top-1/2 h-[min(82vh,84vw)] w-[min(82vh,84vw)] rounded-full" />
+              {lightboxSparkles.map((sparkle) => (
+                <span
+                  key={sparkle.id}
+                  className="lightbox-sparkle"
+                  style={{
+                    left: sparkle.left,
+                    top: sparkle.top,
+                    animationDelay: sparkle.delay,
+                    animationDuration: sparkle.duration,
+                    "--sparkle-scale": sparkle.scale,
+                  }}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={(event) => {
+                spawnHeart(event.clientX, event.clientY, 4);
+                setActive(null);
+              }}
+              className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full bg-white text-[#283b2c] shadow-xl"
+              aria-label="Đóng ảnh"
+            >
               <Icon name="x" className="h-5 w-5" />
             </button>
-            <button type="button" onClick={showPrevious} className="absolute left-4 top-1/2 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white text-[#283b2c] shadow-xl md:grid" aria-label="Ảnh trước">
+            <button
+              type="button"
+              onClick={(event) => {
+                spawnHeart(event.clientX, event.clientY, 4);
+                showPrevious();
+              }}
+              className="absolute left-4 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white text-[#283b2c] shadow-xl md:grid"
+              aria-label="Ảnh trước"
+            >
               <Icon name="chevron-left" className="h-6 w-6" />
             </button>
-            <motion.img key={GALLERY[active].id} src={GALLERY[active].fullSrc} alt={GALLERY[active].alt} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }} className="max-h-[86vh] max-w-[92vw] rounded-lg object-contain shadow-2xl" />
-            <button type="button" onClick={showNext} className="absolute right-4 top-1/2 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white text-[#283b2c] shadow-xl md:grid" aria-label="Ảnh tiếp theo">
+            <motion.div
+              key={GALLERY[active].id}
+              className="lightbox-photo-wrap relative z-10 rounded-xl bg-[#fffaf0]/12 p-2 shadow-[0_24px_80px_rgba(0,0,0,0.38)]"
+              initial={{ opacity: 0, scale: 0.9, y: 24, rotate: -1.4 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16, rotate: 1.2 }}
+              transition={{ type: "spring", stiffness: 96, damping: 17 }}
+            >
+              <span className="lightbox-frame-glow absolute -inset-4 rounded-2xl" />
+              <img src={GALLERY[active].fullSrc} alt={GALLERY[active].alt} className="relative z-10 max-h-[84vh] max-w-[90vw] rounded-lg object-contain shadow-2xl" />
+            </motion.div>
+            <button
+              type="button"
+              onClick={(event) => {
+                spawnHeart(event.clientX, event.clientY, 4);
+                showNext();
+              }}
+              className="absolute right-4 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white text-[#283b2c] shadow-xl md:grid"
+              aria-label="Ảnh tiếp theo"
+            >
               <Icon name="chevron-right" className="h-6 w-6" />
             </button>
           </motion.div>
@@ -1123,6 +1193,86 @@ function App() {
           0% { opacity: 0; transform: translate(-50%, -50%) scale(0.68) rotate(-8deg); }
           12% { opacity: 1; }
           100% { opacity: 0; transform: translate(calc(-50% + var(--heart-drift)), -92px) scale(1.28) rotate(16deg); }
+        }
+        .lightbox-aura {
+          background:
+            radial-gradient(circle, rgba(255, 241, 184, 0.24), transparent 58%),
+            conic-gradient(from 35deg, transparent, rgba(246, 217, 132, 0.34), transparent, rgba(255, 255, 255, 0.2), transparent);
+          filter: blur(1px);
+          animation: lightbox-aura-pulse 4.2s ease-in-out infinite;
+        }
+        .lightbox-orbit {
+          border: 1px solid rgba(246, 217, 132, 0.42);
+          box-shadow:
+            0 0 36px rgba(246, 217, 132, 0.18),
+            inset 0 0 42px rgba(255, 255, 255, 0.08);
+          animation: lightbox-orbit-spin 12s linear infinite;
+        }
+        .lightbox-orbit::before,
+        .lightbox-orbit::after {
+          content: "";
+          position: absolute;
+          width: 11px;
+          height: 11px;
+          border-radius: 3px;
+          background: linear-gradient(135deg, #fff8d8, #d6a333 52%, #fff2ad);
+          box-shadow: 0 0 18px rgba(255, 239, 168, 0.95), 0 0 34px rgba(214, 163, 51, 0.45);
+          transform: rotate(45deg);
+        }
+        .lightbox-orbit::before { right: 16%; top: 4%; }
+        .lightbox-orbit::after { bottom: 7%; left: 18%; }
+        .lightbox-sparkle {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          border-radius: 3px;
+          background: linear-gradient(135deg, #fffdf0, #d6a333 50%, #fff4b9);
+          clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+          filter: drop-shadow(0 0 10px rgba(255, 239, 168, 0.92));
+          animation: lightbox-sparkle-twinkle ease-in-out infinite;
+        }
+        .lightbox-frame-glow {
+          border: 1px solid rgba(246, 217, 132, 0.48);
+          background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 28%, rgba(246, 217, 132, 0.16), transparent 72%),
+            radial-gradient(circle at 82% 10%, rgba(255, 246, 192, 0.55), transparent 18%);
+          box-shadow:
+            0 0 26px rgba(246, 217, 132, 0.36),
+            0 0 76px rgba(180, 139, 58, 0.26);
+          animation: lightbox-frame-shine 3.6s ease-in-out infinite;
+        }
+        .lightbox-photo-wrap::after {
+          content: "";
+          position: absolute;
+          inset: 8px;
+          z-index: 11;
+          pointer-events: none;
+          border-radius: 0.5rem;
+          background: linear-gradient(118deg, transparent 0 34%, rgba(255, 255, 255, 0.55) 45%, transparent 56% 100%);
+          mix-blend-mode: screen;
+          animation: lightbox-photo-sweep 2.8s ease-out both;
+        }
+        @keyframes lightbox-aura-pulse {
+          0%, 100% { opacity: 0.48; transform: translate(-50%, -50%) scale(0.98); }
+          50% { opacity: 0.82; transform: translate(-50%, -50%) scale(1.04); }
+        }
+        @keyframes lightbox-orbit-spin {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes lightbox-sparkle-twinkle {
+          0%, 100% { opacity: 0.2; transform: scale(calc(var(--sparkle-scale) * 0.72)) rotate(0deg); }
+          48% { opacity: 1; transform: scale(calc(var(--sparkle-scale) * 1.28)) rotate(45deg); }
+          70% { opacity: 0.56; transform: scale(var(--sparkle-scale)) rotate(90deg); }
+        }
+        @keyframes lightbox-frame-shine {
+          0%, 100% { opacity: 0.5; filter: saturate(1); }
+          46% { opacity: 0.95; filter: saturate(1.25); }
+        }
+        @keyframes lightbox-photo-sweep {
+          0% { opacity: 0; transform: translateX(-120%); }
+          28% { opacity: 0.75; }
+          100% { opacity: 0; transform: translateX(120%); }
         }
         .diamond-backing {
           position: relative;
