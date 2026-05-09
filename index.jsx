@@ -123,7 +123,7 @@ const HERO_IMAGE = "/assets/images-optimized/large/SMA_1244.webp";
 const FEATURED_IMAGES = Object.freeze([
   "/assets/images-optimized/thumbs/SMA_0059.webp",
   "/assets/images-optimized/thumbs/SMA_1461.webp",
-  "/assets/images-optimized/thumbs/SMA_9998.webp",
+  "/assets/images-optimized/thumbs/SMA_9660.webp",
 ]);
 
 function invariant(condition, message) {
