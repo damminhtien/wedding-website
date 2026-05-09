@@ -553,8 +553,8 @@ function Hero() {
           </div>
 
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
-            <div className="rounded-md border border-[#d8c48b]/70 bg-[#fffaf0]/94 px-4 py-3 font-serif text-xl text-[#263829] shadow-xl shadow-[#42553d]/10 backdrop-blur-xl sm:px-5 sm:text-2xl"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" />{EVENT.dateText}</div>
-            <div className="rounded-md border border-[#d8c48b]/70 bg-[#fffaf0]/94 px-4 py-3 font-serif text-xl leading-7 text-[#263829] shadow-xl shadow-[#42553d]/10 backdrop-blur-xl sm:px-5 sm:text-2xl"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#b48b3a]" />{EVENT.venue}</div>
+            <div className="rounded-md border border-[#f1d992] bg-[#fffaf0] px-4 py-3 font-serif text-xl font-semibold text-[#162318] shadow-2xl shadow-[#142217]/18 backdrop-blur-xl sm:px-5 sm:text-2xl"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#9d7730]" />{EVENT.dateText}</div>
+            <div className="rounded-md border border-[#f1d992] bg-[#fffaf0] px-4 py-3 font-serif text-xl font-semibold leading-7 text-[#162318] shadow-2xl shadow-[#142217]/18 backdrop-blur-xl sm:px-5 sm:text-2xl"><Icon name="map-pin" className="mr-2 inline h-4 w-4 text-[#9d7730]" />{EVENT.venue}</div>
           </div>
 
           <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
