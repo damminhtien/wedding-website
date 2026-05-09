@@ -21,6 +21,12 @@ http://127.0.0.1:5173
 npm run build
 ```
 
+Khi build để deploy public, set `VITE_SITE_URL` bằng domain thật để Facebook/Messenger lấy đúng ảnh preview khi dán link:
+
+```bash
+VITE_SITE_URL=https://your-domain.com npm run build
+```
+
 Lệnh build sẽ tạo thư mục `dist/` và copy các asset cần thiết:
 
 - `assets/images-optimized`
