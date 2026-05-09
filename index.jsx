@@ -456,41 +456,41 @@ function EnvelopeIntro({ onDone }) {
       <FloralCorner className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-180 text-[#b48b3a]/45" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.88),transparent_38%),linear-gradient(180deg,rgba(248,243,232,0.28),rgba(216,196,144,0.24))]" />
 
-      <div className="relative flex w-full max-w-md flex-col items-center">
+      <div className="relative flex w-full max-w-sm flex-col items-center sm:max-w-md">
         <motion.div
-          className="w-full max-w-[350px] sm:max-w-[390px]"
+          className="w-full max-w-[280px] sm:max-w-[390px]"
           animate={opened ? { rotate: 0, y: 0 } : { rotate: [-0.6, 0.8, -0.4, 0.5, 0], y: [0, -3, 0, 2, 0] }}
           transition={opened ? { duration: 0.35 } : { duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
         >
           <motion.div
-            className="relative h-[300px] w-full sm:h-[330px]"
+            className="relative h-[244px] w-full sm:h-[330px]"
             initial={false}
             animate={opened ? "open" : "closed"}
           >
             <motion.div
-              className="absolute left-1/2 top-8 z-10 h-[220px] w-[78%] -translate-x-1/2 overflow-hidden rounded-md border border-[#e8d7ad] bg-[#fffaf0] p-6 text-center shadow-2xl shadow-[#6b5b2e]/18"
+              className="absolute left-1/2 top-6 z-10 h-[178px] w-[78%] -translate-x-1/2 overflow-hidden rounded-md border border-[#e8d7ad] bg-[#fffaf0] p-4 text-center shadow-2xl shadow-[#6b5b2e]/18 sm:top-8 sm:h-[220px] sm:p-6"
               variants={{
                 closed: { y: 72, scale: 0.96, rotate: 0, zIndex: 10 },
                 open: { y: -50, scale: 1, rotate: -1.2, zIndex: 40 },
               }}
               transition={{ type: "spring", stiffness: 68, damping: 18, mass: 0.95, delay: opened ? 0.18 : 0 }}
             >
-              <div className="mx-auto mb-4 grid h-12 w-12 place-items-center rounded-full border border-[#dfc37d] bg-[#f7ecd0] text-[#b48b3a]">
-                <Icon name="heart" className="h-6 w-6" filled />
+              <div className="mx-auto mb-3 grid h-10 w-10 place-items-center rounded-full border border-[#dfc37d] bg-[#f7ecd0] text-[#b48b3a] sm:mb-4 sm:h-12 sm:w-12">
+                <Icon name="heart" className="h-5 w-5 sm:h-6 sm:w-6" filled />
               </div>
-              <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b48b3a]">Thiệp mời</div>
-              <div className="mt-3 font-serif text-4xl italic text-[#40553d]">Tiến & Thuỳ</div>
-              <div className="mt-3 font-serif text-xl italic text-[#7d704a]">10.05 & 11.05.2026</div>
-              <div className="mx-auto mt-5 h-px w-24 bg-[#dfc37d]" />
+              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#b48b3a] sm:text-xs sm:tracking-[0.24em]">Thiệp mời</div>
+              <div className="mt-2 font-serif text-3xl italic text-[#40553d] sm:mt-3 sm:text-4xl">Tiến & Thuỳ</div>
+              <div className="mt-2 font-serif text-base italic text-[#7d704a] sm:mt-3 sm:text-xl">10.05 & 11.05.2026</div>
+              <div className="mx-auto mt-4 h-px w-20 bg-[#dfc37d] sm:mt-5 sm:w-24" />
             </motion.div>
 
-            <div className="absolute bottom-8 left-0 right-0 h-[210px] rounded-lg border border-[#d8c18a] bg-[#ead7a8] shadow-2xl shadow-[#6b5b2e]/20">
-              <div className="absolute inset-x-0 bottom-0 h-[150px] rounded-b-lg bg-[#dec58f]" />
-              <div className="absolute inset-x-0 bottom-0 h-[172px] rounded-b-lg bg-[#e6d09c] [clip-path:polygon(0_0,50%_55%,100%_0,100%_100%,0_100%)]" />
-              <div className="absolute bottom-0 left-0 h-[172px] w-1/2 rounded-bl-lg bg-[#d6bd83] [clip-path:polygon(0_0,100%_55%,100%_100%,0_100%)]" />
-              <div className="absolute bottom-0 right-0 h-[172px] w-1/2 rounded-br-lg bg-[#e8d3a1] [clip-path:polygon(0_55%,100%_0,100%_100%,0_100%)]" />
+            <div className="absolute bottom-7 left-0 right-0 h-[170px] rounded-lg border border-[#d8c18a] bg-[#ead7a8] shadow-2xl shadow-[#6b5b2e]/20 sm:bottom-8 sm:h-[210px]">
+              <div className="absolute inset-x-0 bottom-0 h-[122px] rounded-b-lg bg-[#dec58f] sm:h-[150px]" />
+              <div className="absolute inset-x-0 bottom-0 h-[138px] rounded-b-lg bg-[#e6d09c] [clip-path:polygon(0_0,50%_55%,100%_0,100%_100%,0_100%)] sm:h-[172px]" />
+              <div className="absolute bottom-0 left-0 h-[138px] w-1/2 rounded-bl-lg bg-[#d6bd83] [clip-path:polygon(0_0,100%_55%,100%_100%,0_100%)] sm:h-[172px]" />
+              <div className="absolute bottom-0 right-0 h-[138px] w-1/2 rounded-br-lg bg-[#e8d3a1] [clip-path:polygon(0_55%,100%_0,100%_100%,0_100%)] sm:h-[172px]" />
               <motion.div
-                className="absolute left-0 right-0 top-0 z-20 h-[132px] origin-top rounded-t-lg bg-[#f0dfb8] [clip-path:polygon(0_0,100%_0,50%_100%)]"
+                className="absolute left-0 right-0 top-0 z-20 h-[106px] origin-top rounded-t-lg bg-[#f0dfb8] [clip-path:polygon(0_0,100%_0,50%_100%)] sm:h-[132px]"
                 variants={{
                   closed: { rotateX: 0, y: 0, zIndex: 30 },
                   open: { rotateX: -168, y: -14, zIndex: 5 },
@@ -498,8 +498,8 @@ function EnvelopeIntro({ onDone }) {
                 transition={{ duration: 1.22, ease: [0.16, 1, 0.3, 1] }}
                 style={{ transformPerspective: 900 }}
               />
-              <div className="absolute left-1/2 top-[104px] z-30 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full border border-[#dfc37d] bg-[#40553d] text-[#f7ecd0] shadow-lg">
-                <Icon name="heart" className="h-7 w-7" filled />
+              <div className="absolute left-1/2 top-[84px] z-30 grid h-11 w-11 -translate-x-1/2 place-items-center rounded-full border border-[#dfc37d] bg-[#40553d] text-[#f7ecd0] shadow-lg sm:top-[104px] sm:h-14 sm:w-14">
+                <Icon name="heart" className="h-5 w-5 sm:h-7 sm:w-7" filled />
               </div>
             </div>
           </motion.div>
@@ -538,7 +538,7 @@ function Header() {
             <button key={id} type="button" onClick={() => smoothScroll(id)} className="text-xs font-semibold uppercase tracking-[0.16em] text-[#42553d] transition hover:text-[#b48b3a]">{label}</button>
           ))}
         </nav>
-        <Button onClick={() => smoothScroll("gifts")} variant="outline" className="px-3 py-2.5 text-[#8d6f31] shadow-lg shadow-[#81692d]/10 sm:px-4"><Icon name="gift" className="h-4 w-4" /> Gửi quà</Button>
+        <Button onClick={() => smoothScroll("gifts")} variant="outline" className="hidden px-3 py-2.5 text-[#8d6f31] shadow-lg shadow-[#81692d]/10 sm:px-4 md:inline-flex"><Icon name="gift" className="h-4 w-4" /> Gửi quà</Button>
       </div>
     </header>
   );
@@ -546,13 +546,13 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-[#f8f3e8] pt-16 sm:pt-20 lg:min-h-screen">
-      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover object-[center_42%]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fffaf0]/94 via-[#fffaf0]/86 to-[#283b2c]/34 lg:bg-gradient-to-r lg:from-[#fffaf0]/96 lg:via-[#fffaf0]/86 lg:to-[#283b2c]/26" />
+    <section id="home" className="relative min-h-[calc(100svh-3.5rem)] overflow-hidden bg-[#f8f3e8] pt-14 sm:pt-20 lg:min-h-screen">
+      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover object-[center_38%] sm:object-[center_42%]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffaf0]/86 via-[#fffaf0]/58 to-[#283b2c]/30 lg:bg-gradient-to-r lg:from-[#fffaf0]/96 lg:via-[#fffaf0]/86 lg:to-[#283b2c]/26" />
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#f8f3e8] to-transparent" />
       <FloralCorner className="absolute -left-24 top-16 h-80 w-80 rotate-180 text-[#71856b]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-6 px-4 py-6 sm:px-5 sm:py-12 lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center lg:text-left">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d8c48b]/60 bg-white/75 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8d6f31] shadow-sm backdrop-blur sm:mb-5 sm:px-4 sm:text-xs sm:tracking-[0.16em]"><Icon name="sparkles" className="h-4 w-4" /> Trân trọng kính mời</div>
           <h1 className="diamond-corner inline-block whitespace-nowrap rounded-md bg-[#fffaf0]/58 px-3 py-1 text-[clamp(1.8rem,6.8vw,3.9rem)] font-medium italic tracking-[0.005em] text-[#142217] shadow-2xl shadow-[#42553d]/16 backdrop-blur-md sm:px-4 sm:tracking-[0.015em] lg:tracking-[0.025em]" style={{ fontFamily: '"Fraunces", "Cormorant Garamond", Georgia, serif', fontVariationSettings: '"SOFT" 75, "WONK" 1', WebkitTextStroke: "0.18px rgba(255, 250, 240, 0.86)", textShadow: "0 3px 20px rgba(255, 250, 240, 1), 0 3px 6px rgba(20, 34, 23, 0.3)" }}>Lễ Thành Hôn</h1>
@@ -568,10 +568,10 @@ function Hero() {
           </div>
 
           <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
-            <Button onClick={() => smoothScroll("gifts")} className="h-12 w-full px-6 py-0 sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
+            <Button onClick={() => smoothScroll("gifts")} className="hidden h-12 w-full px-6 py-0 sm:inline-flex sm:w-auto">Gửi quà <Icon name="gift" className="h-4 w-4" /></Button>
             <Button onClick={() => smoothScroll("gallery")} variant="outline" className="h-12 w-full px-6 py-0 sm:w-auto">Xem album <Icon name="camera" className="h-4 w-4" /></Button>
           </div>
-          <div className="mx-auto mt-5 max-w-md lg:hidden">
+          <div className="mx-auto mt-5 hidden max-w-md sm:block lg:hidden">
             <CountdownCard />
           </div>
         </motion.div>
@@ -972,6 +972,7 @@ function Footer() {
         <div className="font-serif text-5xl italic text-[#f4d78d]">Tiến & Thuỳ</div>
         <p className="mt-4 text-sm leading-7 text-white/80">Cảm ơn Quý khách đã dành thời gian chung vui cùng gia đình.</p>
         <div className="mt-6 text-xs uppercase tracking-[0.24em] text-white/70">10.05.2026 · Happy Gold Palace / {EVENT.dateText} · {EVENT.venue}</div>
+        <div className="mt-8 text-xs tracking-[0.18em] text-[#f4d78d]/80">made by minhtien with &lt;3</div>
       </div>
     </footer>
   );
@@ -1000,6 +1001,31 @@ function App() {
       <style>{`
         html { scroll-behavior: smooth; }
         body { margin: 0; background: #f8f3e8; font-family: "Cormorant Garamond", Georgia, serif; }
+        body::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          z-index: 30;
+          pointer-events: none;
+          opacity: 0.16;
+          background:
+            radial-gradient(circle at 14% 18%, rgba(180, 139, 58, 0.18), transparent 18%),
+            radial-gradient(circle at 82% 12%, rgba(66, 85, 61, 0.12), transparent 22%),
+            linear-gradient(90deg, rgba(90, 70, 38, 0.035) 1px, transparent 1px),
+            linear-gradient(180deg, rgba(90, 70, 38, 0.03) 1px, transparent 1px);
+          background-size: auto, auto, 34px 34px, 34px 34px;
+          mix-blend-mode: multiply;
+        }
+        body::after {
+          content: "";
+          position: fixed;
+          inset: 0;
+          z-index: 30;
+          pointer-events: none;
+          opacity: 0.08;
+          background-image: repeating-radial-gradient(circle at 20% 30%, rgba(77, 61, 35, 0.28) 0 0.7px, transparent 0.8px 3px);
+          mix-blend-mode: multiply;
+        }
         @keyframes petal-fall {
           0% { transform: translate3d(0, -12vh, 0) rotate(0deg); }
           50% { transform: translate3d(42px, 50vh, 0) rotate(180deg); }
