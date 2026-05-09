@@ -251,13 +251,83 @@ function Icon({ name, className = "", filled = false }) {
   }
 }
 
+function spawnHeart(x, y, burst = 1) {
+  window.dispatchEvent(new CustomEvent("wedding:heart-effect", { detail: { x, y, burst } }));
+}
+
+function HeartEffects() {
+  const [hearts, setHearts] = useState([]);
+  const lastMoveRef = useRef(0);
+
+  useEffect(() => {
+    const removeHeart = (id) => window.setTimeout(() => {
+      setHearts((current) => current.filter((heart) => heart.id !== id));
+    }, 1600);
+
+    const addHeart = ({ x, y, burst = 1 }) => {
+      const next = Array.from({ length: burst }, (_, index) => ({
+        id: `${Date.now()}-${Math.random()}-${index}`,
+        x: x + (index - (burst - 1) / 2) * 12,
+        y: y + (index % 2 === 0 ? -4 : 8),
+        drift: (index - (burst - 1) / 2) * 18,
+        delay: index * 0.035,
+        size: 14 + (index % 3) * 3,
+      }));
+      setHearts((current) => [...current.slice(-34), ...next]);
+      next.forEach((heart) => removeHeart(heart.id));
+    };
+
+    const onMove = (event) => {
+      if (window.matchMedia("(pointer: coarse)").matches) return;
+      const now = performance.now();
+      if (now - lastMoveRef.current < 130) return;
+      lastMoveRef.current = now;
+      addHeart({ x: event.clientX, y: event.clientY, burst: 1 });
+    };
+
+    const onBurst = (event) => addHeart(event.detail);
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("wedding:heart-effect", onBurst);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("wedding:heart-effect", onBurst);
+    };
+  }, []);
+
+  return (
+    <div className="pointer-events-none fixed inset-0 z-[90] overflow-hidden">
+      {hearts.map((heart) => (
+        <span
+          key={heart.id}
+          className="heart-particle"
+          style={{
+            left: heart.x,
+            top: heart.y,
+            fontSize: heart.size,
+            animationDelay: `${heart.delay}s`,
+            "--heart-drift": `${heart.drift}px`,
+          }}
+        >
+          ♥
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function Button({ children, onClick, type = "button", variant = "solid", className = "", disabled = false }) {
   const base = "inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-4 focus:ring-[#b48b3a]/20 disabled:cursor-not-allowed disabled:opacity-60";
   const styles = variant === "outline"
     ? "border border-[#c7b27a] bg-white/70 text-[#42553d] backdrop-blur hover:bg-white"
     : "bg-[#42553d] text-white shadow-lg shadow-[#42553d]/15 hover:bg-[#344530]";
 
-  return <button type={type} onClick={onClick} disabled={disabled} className={`${base} ${styles} ${className}`}>{children}</button>;
+  const handleClick = (event) => {
+    if (!disabled) spawnHeart(event.clientX, event.clientY, 7);
+    onClick?.(event);
+  };
+
+  return <button type={type} onClick={handleClick} disabled={disabled} className={`${base} ${styles} ${className}`}>{children}</button>;
 }
 
 function SectionLabel({ children }) {
@@ -1040,6 +1110,20 @@ function App() {
           88% { opacity: 1; }
           100% { opacity: 0; transform: translate3d(var(--thank-drift), 112vh, 0) rotate(16deg); }
         }
+        .heart-particle {
+          position: absolute;
+          color: #c99a2e;
+          line-height: 1;
+          text-shadow: 0 0 8px rgba(255, 241, 168, 0.85), 0 3px 10px rgba(90, 67, 23, 0.24);
+          transform: translate(-50%, -50%);
+          animation: heart-float 1.45s ease-out forwards;
+          will-change: transform, opacity;
+        }
+        @keyframes heart-float {
+          0% { opacity: 0; transform: translate(-50%, -50%) scale(0.68) rotate(-8deg); }
+          12% { opacity: 1; }
+          100% { opacity: 0; transform: translate(calc(-50% + var(--heart-drift)), -92px) scale(1.28) rotate(16deg); }
+        }
         .diamond-backing {
           position: relative;
           isolation: isolate;
@@ -1155,6 +1239,7 @@ function App() {
         }
       `}</style>
       <Header />
+      <HeartEffects />
       <Petals />
       <MusicControl />
       <AnimatePresence>
