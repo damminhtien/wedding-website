@@ -537,8 +537,8 @@ function Header() {
 function Hero() {
   return (
     <section id="home" className="relative overflow-hidden bg-[#f8f3e8] pt-16 sm:pt-20 lg:min-h-screen">
-      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 hidden h-full w-full object-cover object-center lg:block" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fffaf0] via-[#f8f3e8] to-[#eef4e8] lg:bg-gradient-to-r lg:from-[#fffaf0]/96 lg:via-[#fffaf0]/86 lg:to-[#283b2c]/26" />
+      <img src={HERO_IMAGE} alt="Tiến và Thuỳ" className="absolute inset-0 h-full w-full object-cover object-[center_42%]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffaf0]/94 via-[#fffaf0]/86 to-[#283b2c]/34 lg:bg-gradient-to-r lg:from-[#fffaf0]/96 lg:via-[#fffaf0]/86 lg:to-[#283b2c]/26" />
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#f8f3e8] to-transparent" />
       <FloralCorner className="absolute -left-24 top-16 h-80 w-80 rotate-180 text-[#71856b]" />
 
@@ -551,10 +551,6 @@ function Hero() {
             <div className="text-3xl leading-none text-[#6b7758] sm:text-4xl">&</div>
             <div>{EVENT.bride}</div>
           </div>
-
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.12 }} className="mx-auto mt-6 overflow-hidden rounded-lg border border-white/80 bg-white/85 shadow-2xl shadow-[#42553d]/12 lg:hidden">
-            <img src={FEATURED_IMAGES[1]} alt="Ảnh cưới Tiến và Thuỳ" className="aspect-[4/5] w-full object-cover object-[center_30%]" />
-          </motion.div>
 
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap lg:justify-start">
             <div className="rounded-md border border-white/80 bg-white/88 px-4 py-3 shadow-xl shadow-[#42553d]/5 backdrop-blur-md sm:px-5"><Icon name="calendar" className="mr-2 inline h-4 w-4 text-[#b48b3a]" /><span className="font-serif text-xl text-[#42553d] sm:text-2xl">{EVENT.dateText}</span></div>
