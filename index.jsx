@@ -292,11 +292,11 @@ function Petals() {
 }
 
 function ThankRain({ burstKey }) {
-  const items = useMemo(() => Array.from({ length: 72 }, (_, index) => ({
+  const items = useMemo(() => Array.from({ length: 150 }, (_, index) => ({
     id: index,
     left: `${(index * 19 + 8) % 100}%`,
-    delay: `${(index % 24) * 1.18}s`,
-    duration: `${9 + (index % 5) * 0.75}s`,
+    delay: `${(index % 60) * 0.84}s`,
+    duration: `${10.5 + (index % 5) * 0.8}s`,
     size: 17 + (index % 4) * 3,
     drift: `${index % 2 === 0 ? 34 : -28}px`,
   })), []);
@@ -735,7 +735,7 @@ function GiftSection() {
     setCopiedAccount(account);
     setThankBurst(Date.now());
     window.setTimeout(() => setCopiedAccount((current) => (current === account ? "" : current)), 1800);
-    window.setTimeout(() => setThankBurst(null), 30000);
+    window.setTimeout(() => setThankBurst(null), 60000);
   };
 
   return (
@@ -974,8 +974,8 @@ function App() {
           100% { transform: translate3d(-24px, 112vh, 0) rotate(360deg); }
         }
         @keyframes thank-fall {
-          0% { opacity: 0; transform: translate3d(0, -12vh, 0) rotate(-8deg); }
-          12% { opacity: 1; }
+          0% { opacity: 1; transform: translate3d(0, 2vh, 0) rotate(-8deg); }
+          88% { opacity: 1; }
           100% { opacity: 0; transform: translate3d(var(--thank-drift), 112vh, 0) rotate(16deg); }
         }
       `}</style>
