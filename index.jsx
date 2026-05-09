@@ -293,11 +293,11 @@ function Petals() {
 }
 
 function ThankRain({ burstKey }) {
-  const items = useMemo(() => Array.from({ length: 24 }, (_, index) => ({
+  const items = useMemo(() => Array.from({ length: 72 }, (_, index) => ({
     id: index,
-    left: `${(index * 17 + 8) % 100}%`,
-    delay: `${(index % 8) * 0.12}s`,
-    duration: `${1.7 + (index % 5) * 0.18}s`,
+    left: `${(index * 19 + 8) % 100}%`,
+    delay: `${(index % 24) * 1.18}s`,
+    duration: `${9 + (index % 5) * 0.75}s`,
     size: 17 + (index % 4) * 3,
     drift: `${index % 2 === 0 ? 34 : -28}px`,
   })), []);
@@ -736,7 +736,7 @@ function GiftSection() {
     setCopiedAccount(account);
     setThankBurst(Date.now());
     window.setTimeout(() => setCopiedAccount((current) => (current === account ? "" : current)), 1800);
-    window.setTimeout(() => setThankBurst(null), 2600);
+    window.setTimeout(() => setThankBurst(null), 30000);
   };
 
   return (
