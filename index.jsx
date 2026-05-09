@@ -309,7 +309,7 @@ function HeartEffects() {
             "--heart-drift": `${heart.drift}px`,
           }}
         >
-          ♥
+          {"\u2665\uFE0E"}
         </span>
       ))}
     </div>
@@ -1183,6 +1183,8 @@ function App() {
         .heart-particle {
           position: absolute;
           color: #c99a2e;
+          font-family: Georgia, "Times New Roman", serif;
+          font-variant-emoji: text;
           line-height: 1;
           text-shadow: 0 0 8px rgba(255, 241, 168, 0.85), 0 3px 10px rgba(90, 67, 23, 0.24);
           transform: translate(-50%, -50%);
