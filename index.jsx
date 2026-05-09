@@ -7,7 +7,6 @@ const EVENT = Object.freeze({
   bride: "Nguyễn Minh Thuỳ",
   date: new Date("2026-05-11T11:00:00+07:00"),
   dateText: "11.05.2026",
-  lunarDate: "25 tháng 03 năm Bính Ngọ",
   venue: "Hội trường A - Hồ Cô Tiên",
   address: "Tổ 65 - khu 5 - Phường Bạch Đằng, Hạ Long - Quảng Ninh",
   ceremonyTime: "10:30",
@@ -29,7 +28,6 @@ const WEDDING_EVENTS = Object.freeze([
   {
     side: "Nhà trai",
     dateText: EVENT.dateText,
-    lunarDate: EVENT.lunarDate,
     venue: EVENT.venue,
     address: EVENT.address,
     mapUrl: "https://maps.app.goo.gl/chcQ7yRCViXh5yMC8",
@@ -632,7 +630,6 @@ function EventSection() {
                   <div>
                     <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#8d6f31]">{event.side}</div>
                     <div className="mt-1 font-serif text-2xl text-[#42553d]">{event.dateText}</div>
-                    {event.lunarDate && <div className="mt-1 text-sm text-[#6d745d]">Tức ngày {event.lunarDate}</div>}
                     <div className="mt-3 text-sm leading-6 text-[#5f684e]">{event.venue} - {event.address}</div>
                   </div>
                 </div>
